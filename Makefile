@@ -1,6 +1,9 @@
+# check homebrew? (sh -c "$(curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh)")
+
 # brew install SDL
+
 # compile 
-#for SDL
+#for SDL2
 #-I../.brew/Cellar/sdl2/2.0.5/include\
 #-L../.brew/Cellar/sdl2/2.0.5/lib -lSDL2
 #for openGl
@@ -9,7 +12,7 @@
 PROG		= bomberman
 
 #-- Core Program
-SRCS		=	main.cpp MainGame.cpp
+SRCS		=	main.cpp MainGame.cpp Sprite.cpp
 OBJS		= $(SRCS:%.cpp=%.o)
 
 #-- OpenGL Module
@@ -19,9 +22,10 @@ OBJS		= $(SRCS:%.cpp=%.o)
 INCLUDES	= -I /include
 WFLAGS		= -Wall -Wextra -Werror -g3 -std=c++11
 CXX			= clang++
-SDLFLAGS	= -I../../.brew/Cellar/sdl2/2.0.5/include/ -L../../.brew/Cellar/sdl2/2.0.5/lib -lSDL2
-OPENGLFLAGS	= -framework OpenGL
-XFLAGS	= $(SDLFLAGS) $(OPENGLFLAGS)
+SDLFLAGS	= -I../../.brew/Cellar/sdl2/2.0.5/include/ -L../../.brew/Cellar/sdl2/2.0.5/lib 
+OPENGLPATHS	= -I../../.brew/Cellar/glew/2.1.0/include/ -L../../.brew/Cellar/glew/2.1.0/lib
+OPENGLFLAGS	= $(OPENGLPATHS) -lSDL2 -lGLEW -framework OpenGL
+CXXFLAGS		= $(SDLFLAGS) $(OPENGLFLAGS)
 
 .PHONY: clean fclean re run
 
@@ -29,7 +33,7 @@ XFLAGS	= $(SDLFLAGS) $(OPENGLFLAGS)
 all: $(PROG)
 
 $(PROG):
-	@$(CXX) $(WFLAGS) $(SRCS) $(XFLAGS) -o $(PROG)
+	@$(CXX) $(WFLAGS) $(SRCS) $(CXXFLAGS) -o $(PROG)
 	@echo "\033[01;36m$(PROG) \t\t-- \033[00;32mCOMPILED\033[0m\n"
 
 #-- General rules

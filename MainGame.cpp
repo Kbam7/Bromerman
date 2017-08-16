@@ -1,15 +1,8 @@
 #include "MainGame.hpp"
+#include "Errors.h"
 #include <iostream>
 #include <cstring>
 
-void fatalError(std::string errorString)
-{
-    std::cout << errorString << std::endl;
-    std::cout << "Enter any key to quit...";
-    int tmp;
-    std::cout << cin << tmp;
-    SDL_QUIT();
-}
 
 MainGame::MainGame()
 {
@@ -26,6 +19,9 @@ MainGame::~MainGame()
 
 void MainGame::run(){
     initSystems();
+
+    _sprite.init(-1.0f, -1.0f , 1.0f , 1.0f);
+
     gameLoop();
 }
 
@@ -89,6 +85,7 @@ void MainGame::drawGame(){
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    _sprite.draw();
     SDL_GL_SwapWindow(_window);
 
 }
