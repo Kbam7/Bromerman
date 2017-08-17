@@ -1,5 +1,5 @@
-#ifndef SPRITE_HPP
-# define SPRITE_HPP
+#ifndef GLSLPROGRAM_HPP
+# define GLSLPROGRAM_HPP
 
 #include <string>
 #include <GL/glew.h>
@@ -13,12 +13,20 @@ public:
     void    compileShaders(const std::string& vertexShaderFilePath,const std::string& fragmentShaderFilePath);
 
     void    linkShaders();
+
+    void addAttribute(const std::string& attributeName);
+
+    void use();
+
+    void unuse();
+
 private:
+
+    int _numAttributes;
+    void compileShader(const std::string& filePath, GLuint id);
     GLuint _programID;
 
     GLuint _vertexShaderID;
-    GLuint _fragmentShaderID;
-
-    
-}
+    GLuint _fragmentShaderID;  
+};
 #endif

@@ -1,0 +1,9 @@
+.DS_Store
+.DS_Store?
+._*
+*.dSYM
+.nfs.*
+.Trashes
+.*.swp
+.*.swo
+.vscode

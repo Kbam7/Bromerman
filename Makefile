@@ -12,7 +12,7 @@
 PROG		= bomberman
 
 #-- Core Program
-SRCS		=	main.cpp MainGame.cpp Sprite.cpp
+SRCS		=	main.cpp MainGame.cpp Sprite.cpp GLSLProgram.cpp Errors.cpp
 OBJS		= $(SRCS:%.cpp=%.o)
 
 #-- OpenGL Module

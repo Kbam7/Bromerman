@@ -1,6 +1,6 @@
 #include "errors.hpp"
 #include <iostream>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 void fatalError(std::string errorString)
 {
