@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ZombieGame"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Bengine\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ZombieGame">
+				<Option output="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/ZombieGame" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/goinfre/kbamping/.brew/include/SDL2"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glm/0.9.8.4/include"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glew/2.1.0/include"/>
+					<Add directory="/System/Library/Frameworks/OpenGL.framework/Headers"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 ZombieGame"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ZombieGame/fast">
+				<Option output="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/ZombieGame" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/goinfre/kbamping/.brew/include/SDL2"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glm/0.9.8.4/include"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glew/2.1.0/include"/>
+					<Add directory="/System/Library/Frameworks/OpenGL.framework/Headers"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 ZombieGame/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Bengine">
+				<Option output="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/libBengine.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/goinfre/kbamping/.brew/include/SDL2"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glm/0.9.8.4/include"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glew/2.1.0/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 Bengine"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Bengine/fast">
+				<Option output="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/libBengine.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/goinfre/kbamping/.brew/include/SDL2"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glm/0.9.8.4/include"/>
+					<Add directory="/goinfre/kbamping/.brew/Cellar/glew/2.1.0/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/include"/>
+					<Add directory="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 Bengine/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Agent.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Agent.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/AudioEngine.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/AudioEngine.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Bengine.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Bengine.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/BengineErrors.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/BengineErrors.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Camera2D.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Camera2D.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/DebugRenderer.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/DebugRenderer.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/GLSLProgram.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/GLSLProgram.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/GUI.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/GUI.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/IMainGame.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/IMainGame.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/IOManager.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/IOManager.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ImageLoader.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ImageLoader.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/InputManager.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/InputManager.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ParticleBatch2D.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ParticleBatch2D.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ParticleEngine2D.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ParticleEngine2D.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ResourceManager.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ResourceManager.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ScreenList.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/ScreenList.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Sprite.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Sprite.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/SpriteBatch.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/SpriteBatch.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/SpriteFont.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/SpriteFont.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/TextureCache.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/TextureCache.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Timing.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Timing.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Window.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/Window.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/picoPNG.cpp">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/picoPNG.h">
+			<Option target="Bengine"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bullet.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bullet.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Gun.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Gun.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Human.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Human.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Level.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Level.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/MainGame.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/MainGame.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Player.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Player.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Zombie.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Zombie.h">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/main.cpp">
+			<Option target="ZombieGame"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Bengine\"/>
+		</Unit>
+		<Unit filename="/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Bengine/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Bengine\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
