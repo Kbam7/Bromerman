@@ -35,7 +35,7 @@ void Human::init(float speed, glm::vec2 pos) {
 
     m_direction = glm::normalize(m_direction);
 
-    m_textureID = Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/human.png").id;
+    m_textureID = Bengine::ResourceManager::getTexture("../Textures/human.png").id;
 }
 
 void Human::update(const std::vector<std::string>& levelData,

@@ -26,7 +26,7 @@ void Player::init(float speed, glm::vec2 pos, Bengine::InputManager* inputManage
     _color.b = 255;
     _color.a = 255;
     _health = 150;
-    m_textureID = Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/player.png").id;
+    m_textureID = Bengine::ResourceManager::getTexture("../Textures/player.png").id;
 }
 
 void Player::addGun(Gun* gun) {

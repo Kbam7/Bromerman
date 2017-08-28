@@ -51,7 +51,7 @@ void MainGame::run() {
 
     initLevel();
 
-    Bengine::Music music = m_audioEngine.loadMusic("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Sound/XYZ.ogg");
+    Bengine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
     music.play(-1);
 
     gameLoop();
@@ -78,7 +78,7 @@ void MainGame::initSystems() {
     m_hudSpriteBatch.init();
 
     // Initialize sprite font
-    m_spriteFont = new Bengine::SpriteFont("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Fonts/chintzy.ttf", 64);
+    m_spriteFont = new Bengine::SpriteFont("../Fonts/chintzy.ttf", 64);
 
     // Set up the camera
     m_camera.init(m_screenWidth, m_screenHeight);
@@ -90,7 +90,7 @@ void MainGame::initSystems() {
 
     // Initialize the particle batch and use a lambda function to define the update
     m_bloodParticleBatch->init(1000, 0.05f,
-                               Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/particle.png"),
+                               Bengine::ResourceManager::getTexture("../Textures/particle.png"),
                                [](Bengine::Particle2D& particle, float deltaTime) {
         particle.position += particle.velocity * deltaTime;
         particle.color.a = (GLubyte)(particle.life * 255.0f);
@@ -102,7 +102,7 @@ void MainGame::initSystems() {
 
 void MainGame::initLevel() {
     // Level 1
-    m_levels.push_back(new Level("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Levels/level1.txt"));
+    m_levels.push_back(new Level("../Levels/level1.txt"));
     m_currentLevel = 0;
 
     m_player = new Player();
@@ -132,15 +132,15 @@ void MainGame::initLevel() {
 
     // Set up the players guns
     const float BULLET_SPEED = 20.0f;
-    m_player->addGun(new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED, m_audioEngine.loadSoundEffect("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Sound/shots/pistol.wav")));
-    m_player->addGun(new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED, m_audioEngine.loadSoundEffect("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Sound/shots/shotgun.wav")));
-    m_player->addGun(new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED, m_audioEngine.loadSoundEffect("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Sound/shots/cg1.wav")));
-    m_player->addGun(new Gun("BOMB", 80, 1, 0.0f, 50, 0, m_audioEngine.loadSoundEffect("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Sound/shots/shotgun.wav")));
+    m_player->addGun(new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")));
+    m_player->addGun(new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")));
+    m_player->addGun(new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")));
+    m_player->addGun(new Gun("BOMB", 80, 1, 0.0f, 50, 0, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")));
 }
 
 void MainGame::initShaders() {
     // Compile our color shader
-    m_textureProgram.compileShaders("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Shaders/textureShading.vert", "/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Shaders/textureShading.frag");
+    m_textureProgram.compileShaders("../Shaders/textureShading.vert", "../Shaders/textureShading.frag");
     m_textureProgram.addAttribute("vertexPosition");
     m_textureProgram.addAttribute("vertexColor");
     m_textureProgram.addAttribute("vertexUV");

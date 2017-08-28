@@ -38,7 +38,7 @@ void Bullet::draw(Bengine::SpriteBatch& spriteBatch) {
     color.b = 75;
     color.a = 255;
 
-    spriteBatch.draw(destRect, uvRect, Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/circle.png").id, 0.0f, color);
+    spriteBatch.draw(destRect, uvRect, Bengine::ResourceManager::getTexture("../Textures/circle.png").id, 0.0f, color);
 }
 
 bool Bullet::collideWithAgent(Agent* agent) {

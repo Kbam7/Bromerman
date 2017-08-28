@@ -17,7 +17,7 @@ void Zombie::init(float speed, glm::vec2 pos) {
     _health = 50;
     // Set Green Color
     _color = Bengine::ColorRGBA8(255, 255, 255, 255);
-    m_textureID = Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/zombie.png").id;
+    m_textureID = Bengine::ResourceManager::getTexture("../Textures/zombie.png").id;
 }
 
 void Zombie::update(const std::vector<std::string>& levelData,

@@ -53,21 +53,21 @@ Level::Level(const std::string& fileName) {
                 case 'R':
                     _spriteBatch.draw(destRect,
                                       uvRect,
-                                      Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/red_bricks.png").id,
+                                      Bengine::ResourceManager::getTexture("../Textures/red_bricks.png").id,
                                       0.0f,
                                       whiteColor);      
                     break;
                 case 'G':
                     _spriteBatch.draw(destRect,
                                       uvRect,
-                                      Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/glass.png").id,
+                                      Bengine::ResourceManager::getTexture("../Textures/glass.png").id,
                                       0.0f,
                                       whiteColor);
                     break;
                 case 'L':
                     _spriteBatch.draw(destRect,
                                       uvRect,
-                                      Bengine::ResourceManager::getTexture("/goinfre/kbamping/Desktop/Bromerman/ZombieGame/Textures/light_bricks.png").id,
+                                      Bengine::ResourceManager::getTexture("../Textures/light_bricks.png").id,
                                       0.0f,
                                       whiteColor);
                     break;
