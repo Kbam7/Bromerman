@@ -1,6 +1,0 @@
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/CMakeFiles/edit_cache.dir
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/CMakeFiles/ZombieGame.dir
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/CMakeFiles/rebuild_cache.dir
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/CMakeFiles/edit_cache.dir
-/goinfre/kbamping/Desktop/Bromerman/ZombieGame/cmake-build-debug/Bengine/CMakeFiles/Bengine.dir
