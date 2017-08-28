@@ -1,9 +1,8 @@
-#include "MainGame.hpp"
-#include "iostream"
+#include "MainGame.h"
 
-int main()
-{
+int main(void) {
     MainGame mainGame;
     mainGame.run();
+
     return 0;
 }
