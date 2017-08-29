@@ -111,3 +111,9 @@ target_link_libraries (${PROJECT_NAME}
         ${CEGUI_LIBS_DYNAMIC}
         ) # ${OPENGL_LIBRARIES} ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} ${GLM_LIBRARIES}  ${SDL2_LIBRARIES}
 
+message(STATUS ${PROJECT_BINARY_DIR})
+
+# - Custom Commands
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ../libs ${PROJECT_BINARY_DIR}/libs
+        )
