@@ -3,6 +3,9 @@
 brew install cmake                  #CMAKE
 brew install pkg-config             #PKG-CONFIG
 
+brew install glfw3                   #GLFW3
+brew link --overwrite glfw3
+
 brew install sdl2                   #SDL2
 brew link --overwrite sdl2
 
@@ -22,4 +25,7 @@ brew link --overwrite sdl2_mixer
 brew install glew                   #GLEW
 brew link --overwrite glew
 
-sh FreshBuild.sh                    #Run CMake
+brew install glm                    #GLM
+brew link --overwrite glm
+
+#sh Build.sh                        #Run CMake
