@@ -1,5 +1,4 @@
 #pragma once
-//#include <SDL.h>
 #include <GL/glew.h>
 #include <GL/glfw3.h>
 #include <string>

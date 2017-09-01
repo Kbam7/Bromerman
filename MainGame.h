@@ -1,14 +1,14 @@
 #pragma once
 
-#include "UntitledEngine/Window.h"
-#include "UntitledEngine/GLSLProgram.h"
-#include "UntitledEngine/Camera2D.h"
-#include "UntitledEngine/InputManager.h"
-#include "UntitledEngine/SpriteBatch.h"
-#include "UntitledEngine/SpriteFont.h"
-#include "UntitledEngine/AudioEngine.h"
-#include "UntitledEngine/ParticleEngine2D.h"
-#include "UntitledEngine/ParticleBatch2D.h"
+#include "UntitledEngine/include/Window.h"
+#include "UntitledEngine/include/GLSLProgram.h"
+#include "UntitledEngine/include/Camera2D.h"
+#include "UntitledEngine/include/InputManager.h"
+#include "UntitledEngine/include/SpriteBatch.h"
+#include "UntitledEngine/include/SpriteFont.h"
+#include "UntitledEngine/include/AudioEngine.h"
+#include "UntitledEngine/include/ParticleEngine2D.h"
+#include "UntitledEngine/include/ParticleBatch2D.h"
 
 #include "Player.h"
 #include "Level.h"
@@ -95,7 +95,7 @@ private:
     int m_numHumansKilled; ///< Humans killed by player
     int m_numZombiesKilled; ///< Zombies killed by player
 
-    UntitledEngine::SpriteFont*    m_spriteFont;
+    //UntitledEngine::SpriteFont*    m_spriteFont;
 
 //    UntitledEngine::AudioEngine m_audioEngine;
 

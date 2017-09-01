@@ -5,7 +5,7 @@
 
 
 Gun::Gun(std::string name, int fireRate, int bulletsPerShot,
-         float spread, float bulletDamage, float bulletSpeed/*, Bengine::SoundEffect fireEffect*/) :
+         float spread, float bulletDamage, float bulletSpeed/*, UntitledEngine::SoundEffect fireEffect*/) :
 //    m_fireEffect(fireEffect),
     _name(name),
     _fireRate(fireRate),

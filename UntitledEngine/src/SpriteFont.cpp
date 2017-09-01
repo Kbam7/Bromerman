@@ -2,8 +2,6 @@
 
 #include "SpriteBatch.h"
 
-#include <SDL.h>
-
 int closestPow2(int i) {
     i--;
     int pi = 1;

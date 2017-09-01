@@ -1,14 +1,13 @@
 #include "MainGame.h"
 
-#include "UntitledEngine/UntitledEngine.h"
-#include "UntitledEngine/Timing.h"
-#include "UntitledEngine/UntitledEngineErrors.h"
-#include "UntitledEngine/ResourceManager.h"
+#include "UntitledEngine/include/UntitledEngine.h"
+#include "UntitledEngine/include/Timing.h"
+#include "UntitledEngine/include/UntitledEngineErrors.h"
+#include "UntitledEngine/include/ResourceManager.h"
 #include <random>
 #include <ctime>
 #include <algorithm>
 
-#include <SDL.h>
 #include <iostream>
 #include <glm/gtx/rotate_vector.hpp>
 
@@ -76,27 +75,27 @@ void MainGame::initSystems() {
     // Initialize our spritebatch
     m_agentSpriteBatch.init();
     m_hudSpriteBatch.init();
-//
-//    // Initialize sprite font
-//    m_spriteFont = new UntitledEngine::SpriteFont("../Fonts/chintzy.ttf", 64);
-//
-//    // Set up the camera
-//    m_camera.init(m_screenWidth, m_screenHeight);
-//    m_hudCamera.init(m_screenWidth, m_screenHeight);
-//    m_hudCamera.setPosition(glm::vec2(m_screenWidth / 2, m_screenHeight / 2));
-//
-//    // Initialize particles
-//    m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
-//
-//    // Initialize the particle batch and use a lambda function to define the update
-//    m_bloodParticleBatch->init(1000, 0.05f,
-//                               UntitledEngine::ResourceManager::getTexture("../Textures/particle.png"),
-//                               [](UntitledEngine::Particle2D& particle, float deltaTime) {
-//        particle.position += particle.velocity * deltaTime;
-//        particle.color.a = (GLubyte)(particle.life * 255.0f);
-//    });
-//
-//    m_particleEngine.addParticleBatch(m_bloodParticleBatch);
+
+    // Initialize sprite font
+    //m_spriteFont = new UntitledEngine::SpriteFont("../Fonts/chintzy.ttf", 64);
+
+    // Set up the camera
+    m_camera.init(m_screenWidth, m_screenHeight);
+    m_hudCamera.init(m_screenWidth, m_screenHeight);
+    m_hudCamera.setPosition(glm::vec2(m_screenWidth / 2, m_screenHeight / 2));
+
+    // Initialize particles
+    m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
+
+    // Initialize the particle batch and use a lambda function to define the update
+    m_bloodParticleBatch->init(1000, 0.05f,
+                               UntitledEngine::ResourceManager::getTexture("../Textures/particle.png"),
+                               [](UntitledEngine::Particle2D& particle, float deltaTime) {
+        particle.position += particle.velocity * deltaTime;
+        particle.color.a = (GLubyte)(particle.life * 255.0f);
+    });
+
+    m_particleEngine.addParticleBatch(m_bloodParticleBatch);
 
 }
 
@@ -155,17 +154,59 @@ void MainGame::gameLoop() {
     const float MS_PER_SECOND = 1000; // Number of milliseconds in a second
     const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
     const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
+    const float ONE_NANOSEC = 1000000000; // One nano second
+    const float GAME_SPEED = ((ONE_NANOSEC / DESIRED_FPS) / 100) * 100;
 
     // Used to cap the FPS
     UntitledEngine::FpsLimiter fpsLimiter;
-    fpsLimiter.setMaxFPS(60.0f);
+    fpsLimiter.setMaxFPS(DESIRED_FPS);
 
     // Zoom out the camera by 3x
     const float CAMERA_SCALE = 1.0f / 3.0f;
     m_camera.setScale(CAMERA_SCALE);
 
-    // Start our previousTicks variable
-    float previousTicks = SDL_GetTicks();
+    /*
+     * WORK ON TIMING !!!
+     */
+
+/*    // Start our previousTicks variable
+    long            _oldNanoSec;
+    time_t          _oldSec;
+    struct timespec timeNow;
+    int             diff;
+
+    current_utc_time(&timeNow);
+    _oldNanoSec = timeNow.tv_nsec;
+    _oldSec  = timeNow.tv_sec;
+    diff = 0;
+    //float previousTicks = SDL_GetTicks();
+
+
+    current_utc_time(&timeNow);
+    if ((timeNow.tv_sec - _oldSec) > 0)     // Update seconds
+    {
+        _oldSec  = timeNow.tv_sec;
+        diff = ONE_NANOSEC - _oldNanoSec;
+        _oldNanoSec = 0;
+    }
+    if ((diff + timeNow.tv_nsec - _oldNanoSec) >= GAME_SPEED)    // Render the frame - Update nanoseconds
+    {
+        _oldNanoSec = timeNow.tv_nsec;
+        diff = 0;
+
+        if (!handleAction(this->moduleController->module->getInput(1)))
+            return (0);
+
+        if (!this->gameData->paused)
+            this->gameData->updateMapData();
+
+        // Update display
+        if (!this->moduleController->module->updateDisplay())
+            this->gameData->paused = true;
+    }*/
+
+
+
 
     // Main loop
     while (m_gameState == GameState::PLAY) {
@@ -250,7 +291,7 @@ void MainGame::updateAgents(float deltaTime) {
 
         // Collide with player
         if (m_zombies[i]->collideWithAgent(m_player)) {
-            UntitledEngine::fatalError("YOU LOSE");
+            fatalError("YOU LOSE");
         }
     }
 
@@ -354,7 +395,7 @@ void MainGame::checkVictory() {
                     m_numHumansKilled, m_numZombiesKilled, m_humans.size() - 1, m_levels[m_currentLevel]->getNumHumans());
 
         // Easy way to end the game :P
-        UntitledEngine::fatalError("");
+        fatalError("");
     }
 }
 
@@ -461,12 +502,12 @@ void MainGame::drawHud() {
     m_hudSpriteBatch.begin();
 
     std::sprintf(buffer, "Num Humans %zu", m_humans.size());
-    m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 0),
-                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));
+    /*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 0),
+                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*/
 
     std::sprintf(buffer, "Num Zombies %zu", m_zombies.size());
-    m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 36),
-                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));
+    /*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 36),
+                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*/
 
     m_hudSpriteBatch.end();
     m_hudSpriteBatch.renderBatch();

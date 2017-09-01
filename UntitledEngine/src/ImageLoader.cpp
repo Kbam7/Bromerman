@@ -1,5 +1,5 @@
-#include "../include/ImageLoader.h"
-#include "../include/picoPNG.h"
+#include "ImageLoader.h"
+#include "picoPNG.h"
 #include "IOManager.h"
 #include "UntitledEngineErrors.h"
 

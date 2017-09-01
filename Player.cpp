@@ -1,6 +1,5 @@
 #include "Player.h"
-#include <SDL.h>
-#include "Bengine/ResourceManager.h"
+#include "UntitledEngine/include/ResourceManager.h"
 
 #include "Gun.h"
 
@@ -15,7 +14,7 @@ Player::~Player() {
     // Empty
 }
 
-void Player::init(float speed, glm::vec2 pos, Bengine::InputManager* inputManager, Bengine::Camera2D* camera, std::vector<Bullet>* bullets) {
+void Player::init(float speed, glm::vec2 pos, UntitledEngine::InputManager* inputManager, UntitledEngine::Camera2D* camera, std::vector<Bullet>* bullets) {
     _speed = speed;
     _position = pos;
     _inputManager = inputManager;
@@ -26,7 +25,7 @@ void Player::init(float speed, glm::vec2 pos, Bengine::InputManager* inputManage
     _color.b = 255;
     _color.a = 255;
     _health = 150;
-    m_textureID = Bengine::ResourceManager::getTexture("../Textures/player.png").id;
+    m_textureID = UntitledEngine::ResourceManager::getTexture("../Textures/player.png").id;
 }
 
 void Player::addGun(Gun* gun) {

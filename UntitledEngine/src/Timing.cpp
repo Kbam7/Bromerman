@@ -1,7 +1,5 @@
 #include "../include/Timing.h"
 
-#include <SDL.h>
-
 namespace UntitledEngine {
 
     FpsLimiter::FpsLimiter() {

@@ -1,5 +1,5 @@
 #include "Agent.h"
-#include "Bengine/ResourceManager.h"
+#include "UntitledEngine/include/ResourceManager.h"
 #include "Level.h"
 #include <algorithm>
 
@@ -87,7 +87,7 @@ bool Agent::collideWithAgent(Agent* agent) {
     return false;
 }
 
-void Agent::draw(Bengine::SpriteBatch& _spriteBatch) {
+void Agent::draw(UntitledEngine::SpriteBatch& _spriteBatch) {
 
     const glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 

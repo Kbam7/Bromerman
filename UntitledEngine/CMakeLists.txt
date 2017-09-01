@@ -14,7 +14,14 @@ pkg_search_module(GLEW REQUIRED glew)
 pkg_search_module(GLFW3 REQUIRED glfw3)
 pkg_search_module(GLM REQUIRED glm)
 
-set(SOURCE_FILES src/UntitledEngineErrors.cpp src/GLSLProgram.cpp src/IOManager.cpp src/UntitledEngine.cpp src/Window.cpp)
+set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/IOManager.cpp
+					src/UntitledEngine.cpp          src/Window.cpp          src/AudioEngine.cpp
+					src/Camera2D.cpp                src/DebugRenderer.cpp   src/ImageLoader.cpp
+					src/IMainGame.cpp               src/InputManager.cpp    src/ParticleBatch2D.cpp
+					src/ParticleEngine2D.cpp        src/picoPNG.cpp         src/ResourceManager.cpp
+					src/ScreenList.cpp              src/Sprite.cpp          src/SpriteBatch.cpp
+					src/SpriteFont.cpp              src/TextureCache.cpp    src/Timing.cpp
+		)
 
 # - Directories for headers
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/include ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} )
