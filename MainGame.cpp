@@ -1,9 +1,9 @@
 #include "MainGame.h"
 
-#include "Bengine/Bengine.h"
-#include "Bengine/Timing.h"
-#include "Bengine/BengineErrors.h"
-#include "Bengine/ResourceManager.h"
+#include "UntitledEngine/UntitledEngine.h"
+#include "UntitledEngine/Timing.h"
+#include "UntitledEngine/UntitledEngineErrors.h"
+#include "UntitledEngine/ResourceManager.h"
 #include <random>
 #include <ctime>
 #include <algorithm>
@@ -51,18 +51,18 @@ void MainGame::run() {
 
     initLevel();
 
-    Bengine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
-    music.play(-1);
+    //UntitledEngine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
+    //music.play(-1);
 
     gameLoop();
 }
 
 void MainGame::initSystems() {
     // Initialize the game engine
-    Bengine::init();
+    UntitledEngine::init();
 
-    // Initialize sound, must happen after Bengine::init
-    m_audioEngine.init();
+    // Initialize sound, must happen after UntitledEngine::init
+    //m_audioEngine.init();
 
     // Create our window
     m_window.create("ZombieGame", m_screenWidth, m_screenHeight, 0);
@@ -76,27 +76,27 @@ void MainGame::initSystems() {
     // Initialize our spritebatch
     m_agentSpriteBatch.init();
     m_hudSpriteBatch.init();
-
-    // Initialize sprite font
-    m_spriteFont = new Bengine::SpriteFont("../Fonts/chintzy.ttf", 64);
-
-    // Set up the camera
-    m_camera.init(m_screenWidth, m_screenHeight);
-    m_hudCamera.init(m_screenWidth, m_screenHeight);
-    m_hudCamera.setPosition(glm::vec2(m_screenWidth / 2, m_screenHeight / 2));
-
-    // Initialize particles
-    m_bloodParticleBatch = new Bengine::ParticleBatch2D;
-
-    // Initialize the particle batch and use a lambda function to define the update
-    m_bloodParticleBatch->init(1000, 0.05f,
-                               Bengine::ResourceManager::getTexture("../Textures/particle.png"),
-                               [](Bengine::Particle2D& particle, float deltaTime) {
-        particle.position += particle.velocity * deltaTime;
-        particle.color.a = (GLubyte)(particle.life * 255.0f);
-    });
-
-    m_particleEngine.addParticleBatch(m_bloodParticleBatch);
+//
+//    // Initialize sprite font
+//    m_spriteFont = new UntitledEngine::SpriteFont("../Fonts/chintzy.ttf", 64);
+//
+//    // Set up the camera
+//    m_camera.init(m_screenWidth, m_screenHeight);
+//    m_hudCamera.init(m_screenWidth, m_screenHeight);
+//    m_hudCamera.setPosition(glm::vec2(m_screenWidth / 2, m_screenHeight / 2));
+//
+//    // Initialize particles
+//    m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
+//
+//    // Initialize the particle batch and use a lambda function to define the update
+//    m_bloodParticleBatch->init(1000, 0.05f,
+//                               UntitledEngine::ResourceManager::getTexture("../Textures/particle.png"),
+//                               [](UntitledEngine::Particle2D& particle, float deltaTime) {
+//        particle.position += particle.velocity * deltaTime;
+//        particle.color.a = (GLubyte)(particle.life * 255.0f);
+//    });
+//
+//    m_particleEngine.addParticleBatch(m_bloodParticleBatch);
 
 }
 
@@ -132,10 +132,10 @@ void MainGame::initLevel() {
 
     // Set up the players guns
     const float BULLET_SPEED = 20.0f;
-    m_player->addGun(new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")));
-    m_player->addGun(new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")));
-    m_player->addGun(new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")));
-    m_player->addGun(new Gun("BOMB", 80, 1, 0.0f, 50, 0, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")));
+    m_player->addGun(new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*/));
+    m_player->addGun(new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
+    m_player->addGun(new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")*/));
+    m_player->addGun(new Gun("BOMB", 80, 1, 0.0f, 50, 0/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
 }
 
 void MainGame::initShaders() {
@@ -157,7 +157,7 @@ void MainGame::gameLoop() {
     const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
 
     // Used to cap the FPS
-    Bengine::FpsLimiter fpsLimiter;
+    UntitledEngine::FpsLimiter fpsLimiter;
     fpsLimiter.setMaxFPS(60.0f);
 
     // Zoom out the camera by 3x
@@ -250,7 +250,7 @@ void MainGame::updateAgents(float deltaTime) {
 
         // Collide with player
         if (m_zombies[i]->collideWithAgent(m_player)) {
-            Bengine::fatalError("YOU LOSE");
+            UntitledEngine::fatalError("YOU LOSE");
         }
     }
 
@@ -354,7 +354,7 @@ void MainGame::checkVictory() {
                     m_numHumansKilled, m_numZombiesKilled, m_humans.size() - 1, m_levels[m_currentLevel]->getNumHumans());
 
         // Easy way to end the game :P
-        Bengine::fatalError("");
+        UntitledEngine::fatalError("");
     }
 }
 
@@ -462,11 +462,11 @@ void MainGame::drawHud() {
 
     std::sprintf(buffer, "Num Humans %zu", m_humans.size());
     m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 0),
-                      glm::vec2(0.5), 0.0f, Bengine::ColorRGBA8(255, 255, 255, 255));
+                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));
 
     std::sprintf(buffer, "Num Zombies %zu", m_zombies.size());
     m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 36),
-                      glm::vec2(0.5), 0.0f, Bengine::ColorRGBA8(255, 255, 255, 255));
+                      glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));
 
     m_hudSpriteBatch.end();
     m_hudSpriteBatch.renderBatch();
@@ -478,7 +478,7 @@ void MainGame::addBlood(const glm::vec2& position, int numParticles) {
     static std::uniform_real_distribution<float> randAngle(0.0f, 360.0f);
 
     glm::vec2 vel(2.0f, 0.0f);
-    Bengine::ColorRGBA8 col(255, 0, 0, 255);
+    UntitledEngine::ColorRGBA8 col(255, 0, 0, 255);
 
     for (int i = 0; i < numParticles; i++) {
         m_bloodParticleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 30.0f);

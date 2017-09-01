@@ -8,54 +8,62 @@ find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(SDL2 REQUIRED sdl2)
-pkg_search_module(SDL2_IMAGE REQUIRED sdl2_image)
-pkg_search_module(SDL2_TTF REQUIRED sdl2_ttf)
-pkg_search_module(SDL2_MIXER REQUIRED sdl2_mixer)
+pkg_search_module(SDL2_IMAGE REQUIRED SDL2_image)
+pkg_search_module(SDL2_TTF REQUIRED SDL2_ttf)
+pkg_search_module(SDL2_MIXER REQUIRED SDL2_mixer)
 pkg_search_module(GLEW REQUIRED glew)
+pkg_search_module(GLFW3 REQUIRED glfw3)
 pkg_search_module(GLM REQUIRED glm)
 
 #find_package(SDL2)
 IF (OpenGL_FOUND)
     message(STATUS "OpenGL Found")
-    message(STATUS ${OpenGL_LIBRARIES})
-    message(STATUS ${OpenGL_LIBRARY_DIRS})
-    message(STATUS ${OpenGL_LDFLAGS})
-    message(STATUS ${OPENGL_INCLUDE_DIR})
-    message(STATUS "\n\r")
+#    message(STATUS ${OpenGL_LIBRARIES})
+#    message(STATUS ${OpenGL_LIBRARY_DIRS})
+#    message(STATUS ${OpenGL_LDFLAGS})
+#    message(STATUS ${OPENGL_INCLUDE_DIR})
+    message("\n\r")
 ENDIF()
 IF (SDL2_FOUND)
     message(STATUS "SDL2 Found")
+    message("\n\r")
 ENDIF()
 IF (SDL2_IMAGE_FOUND)
     message(STATUS "SDL2_IMAGE Found")
-    message(STATUS ${SDL2_IMAGE_LIBRARIES})
-    message(STATUS ${SDL2_IMAGE_LIBRARY_DIRS})
-    message(STATUS ${SDL2_IMAGE_LDFLAGS})
-    message(STATUS ${SDL2_IMAGE_INCLUDE_DIRS})
-    message(STATUS "\n\r")
+#    message(STATUS ${SDL2_IMAGE_LIBRARIES})
+#    message(STATUS ${SDL2_IMAGE_LIBRARY_DIRS})
+#    message(STATUS ${SDL2_IMAGE_LDFLAGS})
+#    message(STATUS ${SDL2_IMAGE_INCLUDE_DIRS})
+    message("\n\r")
 ENDIF()
 IF (SDL2_TTF_FOUND)
     message(STATUS "SDL2_TTF Found")
-    message(STATUS ${SDL2_TTF_LIBRARIES})
-    message(STATUS ${SDL2_TTF_LIBRARY_DIRS})
-    message(STATUS ${SDL2_TTF_LDFLAGS})
-    message(STATUS ${SDL2_TTF_INCLUDE_DIRS})
-    message(STATUS "\n\r")
+#    message(STATUS ${SDL2_TTF_LIBRARIES})
+#    message(STATUS ${SDL2_TTF_LIBRARY_DIRS})
+#    message(STATUS ${SDL2_TTF_LDFLAGS})
+#    message(STATUS ${SDL2_TTF_INCLUDE_DIRS})
+    message("\n\r")
 ENDIF()
 IF (SDL2_MIXER_FOUND)
     message(STATUS "SDL2_MIXER Found")
-    message(STATUS ${SDL2_MIXER_LIBRARIES})
-    message(STATUS ${SDL2_MIXER_LIBRARY_DIRS})
-    message(STATUS ${SDL2_MIXER_LDFLAGS})
-    message(STATUS ${SDL2_MIXER_INCLUDE_DIRS})
-    message(STATUS "\n\r")
+#    message(STATUS ${SDL2_MIXER_LIBRARIES})
+#    message(STATUS ${SDL2_MIXER_LIBRARY_DIRS})
+#    message(STATUS ${SDL2_MIXER_LDFLAGS})
+#    message(STATUS ${SDL2_MIXER_INCLUDE_DIRS})
+    message("\n\r")
 ENDIF()
 IF (GLEW_FOUND)
     message(STATUS "GLEW Found")
-    message(STATUS ${GLEW_LDFLAGS})
+#    message(STATUS ${GLEW_LDFLAGS})
+    message("\n\r")
+ENDIF()
+IF (GLFW3_FOUND)
+    message(STATUS "GLFW3 Found")
+    message("\n\r")
 ENDIF()
 IF (GLM_FOUND)
     message(STATUS "GLM Found")
+    message("\n\r")
 ENDIF()
 
 set(CEGUI_LIBS_DYNAMIC	CEGUIBase-0.dylib
@@ -74,6 +82,7 @@ include_directories(BEFORE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${OPENGL_INCLUDE_DIR}/Headers
         ${GLEW_INCLUDE_DIRS}
+        ${GLFW3_INCLUDE_DIRS}
         ${GLM_INCLUDE_DIRS}
         ${SDL2_INCLUDE_DIRS}
         ${SDL2_IMAGE_INCLUDE_DIRS}
@@ -84,6 +93,7 @@ include_directories(BEFORE
 # - Directories for libraries
 link_directories(
         ${GLEW_LIBRARY_DIRS}
+        ${GLFW3_LIBRARY_DIRS}
         ${GLM_LIBRARY_DIRS}
         ${SDL2_LIBRARY_DIRS}
         ${SDL2_IMAGE_LIBRARY_DIRS}
@@ -103,6 +113,7 @@ target_link_libraries (${PROJECT_NAME}
         ${OPENGL_LIBRARIES}
         ${OPENGL_gl_LIBRARY}
         ${GLEW_LIBRARIES}
+        ${GLFW3_LIBRARIES}
         ${GLM_LIBRARIES}
         ${SDL2_LIBRARIES}
         ${SDL2_IMAGE_LIBRARIES}

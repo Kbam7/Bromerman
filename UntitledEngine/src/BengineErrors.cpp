@@ -1,9 +1,9 @@
-#include "include/BengineErrors.h"
+#include "include/UntitledEngineErrors.h"
 
 #include <cstdlib>
 #include <iostream>
 
-namespace Bengine {
+namespace UntitledEngine {
 
     //Prints out an error message and exits the game
     void fatalError(std::string errorString) {
@@ -11,8 +11,8 @@ namespace Bengine {
         std::cout << "Enter any key to quit...";
         int tmp;
         std::cin >> tmp;
-        SDL_Quit();
-        exit(69);
+        glfwTerminate();
+        exit(1);
     }
 
 }

@@ -3,7 +3,7 @@
 #include <string>
 #include <GL/glew.h>
 
-//namespace Bengine {
+namespace UntitledEngine {
 
     //This class handles the compilation, linking, and usage of a GLSL shader program.
     //Reference: http://www.opengl.org/wiki/Shader_Compilation
@@ -39,4 +39,4 @@
         GLuint _fragmentShaderID;
     };
 
-//}
+}

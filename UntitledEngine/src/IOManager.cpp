@@ -8,7 +8,7 @@
 // Used for windows systems
 //namespace fs = std::tr2::sys;
 
-namespace Bengine {
+namespace UntitledEngine {
 
     bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
         std::ifstream file(filePath, std::ios::binary);

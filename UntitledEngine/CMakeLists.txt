@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(Bengine)
+project(UntitledEngine)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -14,7 +14,7 @@ pkg_search_module(GLEW REQUIRED glew)
 pkg_search_module(GLFW3 REQUIRED glfw3)
 pkg_search_module(GLM REQUIRED glm)
 
-set(SOURCE_FILES src/BengineErrors.cpp src/GLSLProgram.cpp src/IOManager.cpp)
+set(SOURCE_FILES src/UntitledEngineErrors.cpp src/GLSLProgram.cpp src/IOManager.cpp src/UntitledEngine.cpp src/Window.cpp)
 
 # - Directories for headers
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/include ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} )

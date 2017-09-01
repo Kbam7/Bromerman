@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Bengine/Window.h"
-#include "Bengine/GLSLProgram.h"
-#include "Bengine/Camera2D.h"
-#include "Bengine/InputManager.h"
-#include "Bengine/SpriteBatch.h"
-#include "Bengine/SpriteFont.h"
-#include "Bengine/AudioEngine.h"
-#include "Bengine/ParticleEngine2D.h"
-#include "Bengine/ParticleBatch2D.h"
+#include "UntitledEngine/Window.h"
+#include "UntitledEngine/GLSLProgram.h"
+#include "UntitledEngine/Camera2D.h"
+#include "UntitledEngine/InputManager.h"
+#include "UntitledEngine/SpriteBatch.h"
+#include "UntitledEngine/SpriteFont.h"
+#include "UntitledEngine/AudioEngine.h"
+#include "UntitledEngine/ParticleEngine2D.h"
+#include "UntitledEngine/ParticleBatch2D.h"
 
 #include "Player.h"
 #include "Level.h"
@@ -65,42 +65,40 @@ private:
     void addBlood(const glm::vec2& position, int numParticles);
 
     /// Member Variables
-    Bengine::Window m_window; ///< The game window
+    UntitledEngine::Window             m_window; ///< The game window
     
-    Bengine::GLSLProgram m_textureProgram; ///< The shader program
+    UntitledEngine::GLSLProgram        m_textureProgram; ///< The shader program
 
-    Bengine::InputManager m_inputManager; ///< Handles input
+    UntitledEngine::InputManager       m_inputManager; ///< Handles input
 
-    Bengine::Camera2D m_camera; ///< Main Camera
-    Bengine::Camera2D m_hudCamera; ///< Hud Camera
+    UntitledEngine::Camera2D           m_camera; ///< Main Camera
+    UntitledEngine::Camera2D           m_hudCamera; ///< Hud Camera
 
-    Bengine::SpriteBatch m_agentSpriteBatch; ///< Draws all agents
-    Bengine::SpriteBatch m_hudSpriteBatch;
+    UntitledEngine::SpriteBatch        m_agentSpriteBatch; ///< Draws all agents
+    UntitledEngine::SpriteBatch        m_hudSpriteBatch;
 
-    Bengine::ParticleEngine2D m_particleEngine;
-    Bengine::ParticleBatch2D* m_bloodParticleBatch;
+    UntitledEngine::ParticleEngine2D   m_particleEngine;
+    UntitledEngine::ParticleBatch2D*   m_bloodParticleBatch;
 
-    std::vector<Level*> m_levels; ///< vector of all levels
+    std::vector<Level*>         m_levels; ///< vector of all levels
 
     int m_screenWidth = 1024;
     int m_screenHeight = 768;
-
     float m_fps;
-
     int m_currentLevel;
 
-    Player* m_player;
-    std::vector<Human*> m_humans; ///< Vector of all humans
-    std::vector<Zombie*> m_zombies; ///< Vector of all zombies
-    std::vector<Bullet> m_bullets;
+    Player*                 m_player;
+    std::vector<Human*>     m_humans; ///< Vector of all humans
+    std::vector<Zombie*>    m_zombies; ///< Vector of all zombies
+    std::vector<Bullet>     m_bullets;
 
     int m_numHumansKilled; ///< Humans killed by player
     int m_numZombiesKilled; ///< Zombies killed by player
 
-    Bengine::SpriteFont* m_spriteFont;
+    UntitledEngine::SpriteFont*    m_spriteFont;
 
-    Bengine::AudioEngine m_audioEngine;
+//    UntitledEngine::AudioEngine m_audioEngine;
 
-    GameState m_gameState;
+    GameState               m_gameState;
 };
 

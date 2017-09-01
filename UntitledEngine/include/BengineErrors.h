@@ -2,7 +2,7 @@
 
 #include <string>
 
-//namespace Bengine {
+//namespace UntitledEngine {
 
     extern void fatalError(std::string errorString);
 
