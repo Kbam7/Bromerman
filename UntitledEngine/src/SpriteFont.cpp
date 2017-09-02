@@ -26,7 +26,7 @@ namespace UntitledEngine {
 
     void SpriteFont::init(const char* font, int size, char cs, char ce) {
         // Initialize SDL_ttf
-        if (!TTF_WasInit()) {
+        /*if (!TTF_WasInit()) {
             TTF_Init();
         }
         TTF_Font* f = TTF_OpenFont(font, size);
@@ -164,7 +164,7 @@ namespace UntitledEngine {
         glBindTexture(GL_TEXTURE_2D, 0);
         delete[] glyphRects;
         delete[] bestPartition;
-        TTF_CloseFont(f);
+        TTF_CloseFont(f);*/
     }
 
     void SpriteFont::dispose() {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
 #include "UntitledEngine/include/Window.h"
 #include "UntitledEngine/include/GLSLProgram.h"
 #include "UntitledEngine/include/Camera2D.h"
@@ -17,88 +18,91 @@
 class Zombie;
 
 enum class GameState {
-    PLAY,
-    EXIT
+	PLAY,
+	EXIT
 };
 
-class MainGame
-{
+class MainGame {
 public:
-    MainGame();
-    ~MainGame();
+	MainGame();
 
-    /// Runs the game
-    void run();
+	~MainGame();
+
+	/// Runs the game
+	void run();
 
 private:
-    /// Initializes the core systems
-    void initSystems();
+	/// Initializes the core systems
+	void initSystems();
 
-    /// Initializes the level and sets up everything
-    void initLevel();
+	/// Initializes the level and sets up everything
+	void initLevel();
 
-    /// Initializes the shaders
-    void initShaders();
+	/// Initializes the shaders
+	void initShaders();
 
-    /// Main game loop for the program
-    void gameLoop();
+	/// Main game loop for the program
+	void gameLoop();
 
-    /// Updates all agents
-    void updateAgents(float deltaTime);
+	/// Updates all agents
+	void updateAgents(float deltaTime);
 
-    /// Updates all bullets
-    void updateBullets(float deltaTim);
+	/// Updates all bullets
+	void updateBullets(float deltaTim);
 
-    /// Checks the victory condition
-    void checkVictory();
+	/// Checks the victory condition
+	void checkVictory();
 
-    /// Handles input processing
-    void processInput();
+	/// Handles input processing
+	void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	void processInput();
 
-    /// Renders the game
-    void drawGame();
+	/// Renders the game
+	void drawGame();
 
-    /// Draws the HUD
-    void drawHud();
+	/// Draws the HUD
+	void drawHud();
 
-    /// Adds blood to the particle engine
-    void addBlood(const glm::vec2& position, int numParticles);
+	/// Adds blood to the particle engine
+	void addBlood(const glm::vec2 &position, int numParticles);
 
-    /// Member Variables
-    UntitledEngine::Window             m_window; ///< The game window
-    
-    UntitledEngine::GLSLProgram        m_textureProgram; ///< The shader program
+	/// Member Variables
+	UntitledEngine::Window m_window; ///< The game window
 
-    UntitledEngine::InputManager       m_inputManager; ///< Handles input
+	UntitledEngine::GLSLProgram m_textureProgram; ///< The shader program
 
-    UntitledEngine::Camera2D           m_camera; ///< Main Camera
-    UntitledEngine::Camera2D           m_hudCamera; ///< Hud Camera
+	UntitledEngine::InputManager m_inputManager; ///< Handles input
 
-    UntitledEngine::SpriteBatch        m_agentSpriteBatch; ///< Draws all agents
-    UntitledEngine::SpriteBatch        m_hudSpriteBatch;
+	UntitledEngine::Camera2D m_camera; ///< Main Camera
+	UntitledEngine::Camera2D m_hudCamera; ///< Hud Camera
 
-    UntitledEngine::ParticleEngine2D   m_particleEngine;
-    UntitledEngine::ParticleBatch2D*   m_bloodParticleBatch;
+	UntitledEngine::SpriteBatch m_agentSpriteBatch; ///< Draws all agents
+	UntitledEngine::SpriteBatch m_hudSpriteBatch;
 
-    std::vector<Level*>         m_levels; ///< vector of all levels
+	UntitledEngine::ParticleEngine2D m_particleEngine;
+	UntitledEngine::ParticleBatch2D *m_bloodParticleBatch;
 
-    int m_screenWidth = 1024;
-    int m_screenHeight = 768;
-    float m_fps;
-    int m_currentLevel;
+	std::vector<Level *> m_levels; ///< vector of all levels
 
-    Player*                 m_player;
-    std::vector<Human*>     m_humans; ///< Vector of all humans
-    std::vector<Zombie*>    m_zombies; ///< Vector of all zombies
-    std::vector<Bullet>     m_bullets;
+	int m_screenWidth = 1024;
+	int m_screenHeight = 768;
+	float m_fps;
+	int m_currentLevel;
 
-    int m_numHumansKilled; ///< Humans killed by player
-    int m_numZombiesKilled; ///< Zombies killed by player
+	Player *m_player;
+	std::vector<Human *> m_humans; ///< Vector of all humans
+	std::vector<Zombie *> m_zombies; ///< Vector of all zombies
+	std::vector<Bullet> m_bullets;
 
-    //UntitledEngine::SpriteFont*    m_spriteFont;
+	int m_numHumansKilled; ///< Humans killed by player
+	int m_numZombiesKilled; ///< Zombies killed by player
+
+	//UntitledEngine::SpriteFont*    m_spriteFont;
 
 //    UntitledEngine::AudioEngine m_audioEngine;
 
-    GameState               m_gameState;
+	GameState m_gameState;
 };
 

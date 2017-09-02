@@ -1,4 +1,4 @@
-#include "../include/Timing.h"
+#include "Timing.h"
 
 namespace UntitledEngine {
 
@@ -13,16 +13,17 @@ namespace UntitledEngine {
     }
 
     void FpsLimiter::begin() {
-        _startTicks = SDL_GetTicks();
+        _startTicks = clock();
     }
 
     float FpsLimiter::end() {
         calculateFPS();
 
-        float frameTicks = (float)(SDL_GetTicks() - _startTicks);
+        float frameTicks = (float)(clock() - _startTicks);
         //Limit the FPS to the max FPS
         if (1000.0f / _maxFPS > frameTicks) {
-            SDL_Delay((Uint32)(1000.0f / _maxFPS - frameTicks));
+            //SDL_Delay((Uint32)(1000.0f / _maxFPS - frameTicks));
+	        std::this_thread::sleep_for(std::chrono::milliseconds((size_t)(1000.0f / _maxFPS - frameTicks)));
         }
 
         return _fps;
@@ -36,10 +37,10 @@ namespace UntitledEngine {
         //The current frame we are on
         static int currentFrame = 0;
         //the ticks of the previous frame
-        static Uint32 prevTicks = SDL_GetTicks();
+        static clock_t prevTicks = clock();
 
         //Ticks for the current frame
-        Uint32 currentTicks = SDL_GetTicks();
+        clock_t currentTicks = clock();
 
         //Calculate the number of ticks (ms) for this frame
         _frameTime = (float)(currentTicks - prevTicks);

@@ -1,32 +1,36 @@
 #pragma once
+#include <time.h>
+#include <chrono>   // For delay
+#include <thread>   // For delay
 
 namespace UntitledEngine {
 
-    ///Calculates FPS and also limits FPS
-    class FpsLimiter {
-    public:
-        FpsLimiter();
+	///Calculates FPS and also limits FPS
+	class FpsLimiter {
+	public:
+		FpsLimiter();
 
-        // Initializes the FPS limiter. For now, this is
-        // analogous to setMaxFPS
-        void init(float maxFPS);
+		// Initializes the FPS limiter. For now, this is
+		// analogous to setMaxFPS
+		void init(float maxFPS);
 
-        // Sets the desired max FPS
-        void setMaxFPS(float maxFPS);
+		// Sets the desired max FPS
+		void setMaxFPS(float maxFPS);
 
-        void begin();
+		void begin();
 
-        // end() will return the current FPS as a float
-        float end();
-    private:
-        // Calculates the current FPS
-        void calculateFPS();
+		// end() will return the current FPS as a float
+		float end();
 
-        // Variables
-        float _fps;
-        float _maxFPS;
-        float _frameTime;
-        unsigned int _startTicks;
-    };
+	private:
+		// Calculates the current FPS
+		void calculateFPS();
+
+		// Variables
+		float _fps;
+		float _maxFPS;
+		float _frameTime;
+		clock_t _startTicks;
+	};
 
 }

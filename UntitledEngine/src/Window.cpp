@@ -1,5 +1,7 @@
-#include "../include/Window.h"
+#include "Window.h"
 #include "UntitledEngineErrors.h"
+
+#include <GLFW/glfw3.h>
 
 namespace UntitledEngine {
 

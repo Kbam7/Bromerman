@@ -24,7 +24,7 @@ set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/
 		)
 
 # - Directories for headers
-include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/include ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} )
+include_directories(BEFORE include/ ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} )
 
 # - Add library
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})

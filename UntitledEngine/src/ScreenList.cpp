@@ -1,6 +1,6 @@
-#include "../include/ScreenList.h"
+#include "ScreenList.h"
 
-#include "../include/IGameScreen.h"
+#include "IGameScreen.h"
 
 namespace UntitledEngine {
 

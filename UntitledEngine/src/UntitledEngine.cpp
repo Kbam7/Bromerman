@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "../include/UntitledEngine.h"
+#include "UntitledEngine.h"
 #include "UntitledEngineErrors.h"
 
 namespace UntitledEngine {
@@ -21,6 +21,20 @@ namespace UntitledEngine {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
 
 		return 0;
+	}
+
+	size_t GetGameTicks(void) {
+		static float    lastTime;
+		long            _oldNanoSec;
+		time_t          _oldSec;
+		struct timespec timeNow;
+		int             diff;
+
+		current_utc_time(&timeNow);
+		_oldNanoSec = timeNow.tv_nsec;
+		_oldSec  = timeNow.tv_sec;
+		diff = 0;
+		// return newTime - lastTime
 	}
 
 }

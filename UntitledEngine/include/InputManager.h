@@ -8,34 +8,37 @@ namespace UntitledEngine {
 // Input manager stores a key map that maps SDL_Keys to booleans.
 // If the value in the key map is true, then the key is pressed.
 // Otherwise, it is released.
-class InputManager
-{
-public:
-    InputManager();
-    ~InputManager();
+	class InputManager {
+	public:
+		InputManager();
 
-    void update();
+		~InputManager();
 
-    void pressKey(unsigned int keyID);
-    void releaseKey(unsigned int keyID);
+		void update();
 
-    void setMouseCoords(float x, float y);
+		void pressKey(unsigned int keyID);
 
-    /// Returns true if the key is held down
-    bool isKeyDown(unsigned int keyID);
+		void releaseKey(unsigned int keyID);
 
-    /// Returns true if the key was just pressed
-    bool isKeyPressed(unsigned int keyID);
+		void setMouseCoords(float x, float y);
 
-    //getters
-    glm::vec2 getMouseCoords() const { return _mouseCoords; }
-private:
-    /// Returns true if the key is held down
-    bool wasKeyDown(unsigned int keyID);
+		/// Returns true if the key is held down
+		bool isKeyDown(unsigned int keyID);
 
-    std::unordered_map<unsigned int, bool> _keyMap;
-    std::unordered_map<unsigned int, bool> _previousKeyMap;
-    glm::vec2 _mouseCoords;
-};
+		/// Returns true if the key was just pressed
+		bool isKeyPressed(unsigned int keyID);
+
+		/// Returns true if the key is held down
+		bool wasKeyDown(unsigned int keyID);
+
+		//getters
+		glm::vec2 getMouseCoords() const { return _mouseCoords; }
+
+	private:
+
+		std::unordered_map<unsigned int, bool> _keyMap;
+		std::unordered_map<unsigned int, bool> _previousKeyMap;
+		glm::vec2 _mouseCoords;
+	};
 
 }
