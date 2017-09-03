@@ -4,6 +4,7 @@
 #include "Gun.h"
 
 #include <iostream> // debug
+#include <GLFW/glfw3.h>
 
 Player::Player() :
     _currentGunIndex(-1) {
@@ -46,24 +47,24 @@ void Player::update(const std::vector<std::string>& levelData,
     (void)humans;
     (void)zombies;
 
-    if (_inputManager->isKeyDown(SDLK_w)) {
+    if (_inputManager->isKeyDown(GLFW_KEY_W)) {
         _position.y += _speed * deltaTime;
-    } else if (_inputManager->isKeyDown(SDLK_s)) {
+    } else if (_inputManager->isKeyDown(GLFW_KEY_S)) {
         _position.y -= _speed * deltaTime;
     }
-    if (_inputManager->isKeyDown(SDLK_a)) {
+    if (_inputManager->isKeyDown(GLFW_KEY_A)) {
         _position.x -= _speed * deltaTime;
-    } else if (_inputManager->isKeyDown(SDLK_d)) {
+    } else if (_inputManager->isKeyDown(GLFW_KEY_D)) {
         _position.x += _speed * deltaTime;
     }
 
-    if (_inputManager->isKeyDown(SDLK_1)) {
+    if (_inputManager->isKeyDown(GLFW_KEY_1)) {
         _currentGunIndex = 0;
-    } else if (_inputManager->isKeyDown(SDLK_2) && _guns.size() >= 1) {
+    } else if (_inputManager->isKeyDown(GLFW_KEY_2) && _guns.size() >= 1) {
         _currentGunIndex = 1;
-    } else if (_inputManager->isKeyDown(SDLK_3) && _guns.size() >= 2) {
+    } else if (_inputManager->isKeyDown(GLFW_KEY_3) && _guns.size() >= 2) {
         _currentGunIndex = 2;
-    } else if (_inputManager->isKeyDown(SDLK_4) && _guns.size() >= 3) {
+    } else if (_inputManager->isKeyDown(GLFW_KEY_4) && _guns.size() >= 3) {
         _currentGunIndex = 3;
     }
 
@@ -79,7 +80,7 @@ void Player::update(const std::vector<std::string>& levelData,
     //m_direction = glm::vec2(-1, 0);
     if (_currentGunIndex != -1) {
 
-        _guns[_currentGunIndex]->update(_inputManager->isKeyDown(SDL_BUTTON_LEFT),
+        _guns[_currentGunIndex]->update(_inputManager->isKeyDown(GLFW_MOUSE_BUTTON_LEFT),
                                         centerPosition,
                                         m_direction,
                                         *_bullets,

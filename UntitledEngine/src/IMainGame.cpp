@@ -48,7 +48,8 @@ namespace UntitledEngine {
         m_isRunning = false;
     }
 
-    void IMainGame::onSDLEvent(SDL_Event& evnt) {
+// Unused in current game. Needed for screen management and GUI
+/*    void IMainGame::onSDLEvent(SDL_Event& evnt) {
         switch (evnt.type) {
             case SDL_QUIT:
                 exitGame();
@@ -69,12 +70,12 @@ namespace UntitledEngine {
                 inputManager.releaseKey(evnt.button.button);
                 break;
         }
-    }
+    }*/
 
     bool IMainGame::init() {
         UntitledEngine::init();
 
-        SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+        //SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
         if (!initSystems()) return false;
 

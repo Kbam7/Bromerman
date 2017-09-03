@@ -3,7 +3,7 @@
 #include <functional>
 #include <glm/glm.hpp>
 #include "Vertex.h"
-#include "../src/SpriteBatch.h"
+#include "SpriteBatch.h"
 #include "GLTexture.h"
 
 namespace UntitledEngine {

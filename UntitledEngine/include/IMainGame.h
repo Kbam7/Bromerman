@@ -27,7 +27,7 @@ namespace UntitledEngine {
         // Called when exiting
         virtual void onExit() = 0;
 
-        void onSDLEvent(SDL_Event& evnt);
+        /*void onSDLEvent(SDL_Event& evnt);*/ // Check definition for notes
 
         float getFps() const {
             return m_fps;

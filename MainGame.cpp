@@ -19,6 +19,52 @@ const float HUMAN_SPEED = 1.0f;
 const float ZOMBIE_SPEED = 1.3f;
 const float PLAYER_SPEED = 5.0f;
 
+// Key callback, set on initialisation
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+	(void) scancode;
+	(void) mods;
+	UntitledEngine::InputManager *inputManager;
+
+	inputManager = static_cast<UntitledEngine::InputManager *>(glfwGetWindowUserPointer(window));
+	switch (action) {
+		case GLFW_PRESS:
+		case GLFW_REPEAT:
+			inputManager->pressKey(key);
+			break;
+		case GLFW_RELEASE:
+		default:
+			inputManager->releaseKey(key);
+			break;
+	}
+}
+
+// Cursor Position callback, set on initialisation
+void cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
+	UntitledEngine::InputManager *inputManager;
+
+	inputManager = static_cast<UntitledEngine::InputManager *>(glfwGetWindowUserPointer(window));
+	inputManager->setMouseCoords(xpos, ypos);
+}
+
+// Mouse Button callback, set on initialisation
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
+	(void) mods;
+	UntitledEngine::InputManager *inputManager;
+
+	inputManager = static_cast<UntitledEngine::InputManager *>(glfwGetWindowUserPointer(window));
+	switch (action) {
+		case GLFW_PRESS:
+		case GLFW_REPEAT:
+			inputManager->pressKey(button);
+			break;
+		case GLFW_RELEASE:
+		default:
+			inputManager->releaseKey(button);
+			break;
+
+	}
+}
+
 MainGame::MainGame() :
 		m_screenWidth(1024),
 		m_screenHeight(768),
@@ -66,7 +112,14 @@ void MainGame::initSystems() {
 
 	// Create our window
 	m_window.create("ZombieGame", m_screenWidth, m_screenHeight, 0);
-	glfwSetMouseButtonCallback(m_window.getWindow(), mouse_button_callback);
+
+	// Set window data for callback functions
+	glfwSetWindowUserPointer(m_window.getWindow(), &m_inputManager);
+
+	// Set callbacks
+	glfwSetKeyCallback(m_window.getWindow(), &key_callback);
+	glfwSetCursorPosCallback(m_window.getWindow(), &cursor_position_callback);
+	glfwSetMouseButtonCallback(m_window.getWindow(), &mouse_button_callback);
 
 	// Grey background color
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
@@ -160,8 +213,8 @@ void MainGame::gameLoop() {
 	const float MS_PER_SECOND = 1000; // Number of milliseconds in a second
 	const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
 	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
-	const float ONE_NANOSEC = 1000000000; // One nano second
-	const float GAME_SPEED = ((ONE_NANOSEC / DESIRED_FPS) / 100) * 100;
+	//const float ONE_NANOSEC = 1000000000; // One nano second
+	//const float GAME_SPEED = ((ONE_NANOSEC / DESIRED_FPS) / 100) * 100;
 
 	// Used to cap the FPS
 	UntitledEngine::FpsLimiter fpsLimiter;
@@ -256,7 +309,7 @@ void MainGame::updateAgents(float deltaTime) {
 
 		// Collide with player
 		if (m_zombies[i]->collideWithAgent(m_player)) {
-			fatalError("YOU LOSE");
+			UntitledEngine::fatalError("YOU LOSE");
 		}
 	}
 
@@ -361,50 +414,12 @@ void MainGame::checkVictory() {
 		            m_levels[m_currentLevel]->getNumHumans());
 
 		// Easy way to end the game :P
-		fatalError("");
-	}
-}
-
-// Key callback, set on initialisation
-void MainGame::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
-	(void)window;
-	(void)scancode;
-	(void)mods;
-
-	switch (action) {
-		case GLFW_PRESS:
-		case GLFW_REPEAT:
-			m_inputManager.pressKey(key);
-			break;
-		case GLFW_RELEASE:
-		default:
-			m_inputManager.releaseKey(key);
-			break;
-	}
-}
-
-void MainGame::cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-	m_inputManager.setMouseCoords(xpos, ypos);
-}
-
-void MainGame::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-	(void)window;
-	(void)mods;
-
-	switch (action) {
-		case GLFW_PRESS:
-		case GLFW_REPEAT:
-			m_inputManager.pressKey(button);
-			break;
-		case GLFW_RELEASE:
-		default:
-			m_inputManager.releaseKey(button);
-			break;
-
+		UntitledEngine::fatalError("");
 	}
 }
 
 void MainGame::processInput() {
+	glfwPollEvents();
 	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q))
 		m_gameState = GameState::EXIT;
 }

@@ -1,13 +1,12 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
 #include "UntitledEngine/include/Window.h"
 #include "UntitledEngine/include/GLSLProgram.h"
 #include "UntitledEngine/include/Camera2D.h"
 #include "UntitledEngine/include/InputManager.h"
 #include "UntitledEngine/include/SpriteBatch.h"
-#include "UntitledEngine/include/SpriteFont.h"
-#include "UntitledEngine/include/AudioEngine.h"
+//#include "UntitledEngine/include/SpriteFont.h"
+//#include "UntitledEngine/include/AudioEngine.h"
 #include "UntitledEngine/include/ParticleEngine2D.h"
 #include "UntitledEngine/include/ParticleBatch2D.h"
 
@@ -15,7 +14,14 @@
 #include "Level.h"
 #include "Bullet.h"
 
+#include <GLFW/glfw3.h>
+
 class Zombie;
+
+// Input callbacks
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 enum class GameState {
 	PLAY,
@@ -54,9 +60,6 @@ private:
 	void checkVictory();
 
 	/// Handles input processing
-	void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
-	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	void processInput();
 
 	/// Renders the game
