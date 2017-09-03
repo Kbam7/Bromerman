@@ -210,8 +210,8 @@ void MainGame::gameLoop() {
 	// Some helpful constants.
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
 	const int MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
-	const float MS_PER_SECOND = 1000; // Number of milliseconds in a second
-	const float DESIRED_FRAMETIME = MS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
+	const float UNITS_PER_SECOND = 1000;  // Number of units in a second
+	const float DESIRED_FRAMETIME = UNITS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
 	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
 	//const float ONE_NANOSEC = 1000000000; // One nano second
 	//const float GAME_SPEED = ((ONE_NANOSEC / DESIRED_FPS) / 100) * 100;
@@ -224,18 +224,30 @@ void MainGame::gameLoop() {
 	const float CAMERA_SCALE = 1.0f / 3.0f;
 	m_camera.setScale(CAMERA_SCALE);
 
-	float previousTicks = clock();
+	float previousTicks = UntitledEngine::getGameTicks();
+
+	std::cout << "first previousTicks: " << previousTicks
+			<< "\nUntitledEngine::getGameTicks(): " << UntitledEngine::getGameTicks()
+			<< "\nUntitledEngine::getGameTicks(): " << (UntitledEngine::getGameTicks())
+			<< "\nDESIRED_FRAMETIME: " << DESIRED_FRAMETIME
+			<< "\nUNITS_PER_SECOND: " << UNITS_PER_SECOND << std::endl;
 
 	// Main loop
 	while (m_gameState == GameState::PLAY) {
 		fpsLimiter.begin();
 
 		// Calculate the frameTime in milliseconds
-		float newTicks = clock();
-		float frameTime = newTicks - previousTicks;
+		float newTicks = UntitledEngine::getGameTicks();
+		float frameTime = ((newTicks - previousTicks));
+
+		std::cout << "newTicks: " << newTicks
+		          << "\nprevTicks: " << previousTicks
+		          << "\nframeTime: " << frameTime
+		          << std::endl; // debug
+
 		previousTicks = newTicks; // Store newTicks in previousTicks so we can use it next frame
 		// Get the total delta time
-		float totalDeltaTime = frameTime / DESIRED_FRAMETIME;
+		float totalDeltaTime = (frameTime / DESIRED_FRAMETIME);
 
 		checkVictory();
 
@@ -268,6 +280,9 @@ void MainGame::gameLoop() {
 		// End the frame, limit the FPS, and get the current FPS.
 		m_fps = fpsLimiter.end();
 		std::cout << m_fps << std::endl;
+
+		/*int tmp;           // debug
+		std::cin >> tmp; // debug*/
 	}
 }
 
