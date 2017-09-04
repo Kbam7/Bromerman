@@ -1,8 +1,8 @@
-#include "Camera2D.h"
+#include "Camera3D.h"
 
 namespace UntitledEngine {
 
-    Camera2D::Camera2D() :
+    Camera3D::Camera3D() :
         _screenWidth(500),
         _screenHeight(500),
         _needsMatrixUpdate(true),
@@ -13,18 +13,18 @@ namespace UntitledEngine {
     {
     }
 
-    Camera2D::~Camera2D()
+    Camera3D::~Camera3D()
     {
     }
 
-    void Camera2D::init(int screenWidth, int screenHeight) {
+    void Camera3D::init(int screenWidth, int screenHeight) {
         _screenWidth = screenWidth;
         _screenHeight = screenHeight;
         _orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
     }
 
     //updates the camera matrix if needed
-    void Camera2D::update() {
+    void Camera3D::update() {
 
         //Only update if our position or scale have changed
         if (_needsMatrixUpdate) {
@@ -41,7 +41,7 @@ namespace UntitledEngine {
         }
     }
 
-    glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
+    glm::vec2 Camera3D::convertScreenToWorld(glm::vec2 screenCoords) {
         // Invert Y direction
         screenCoords.y = _screenHeight - screenCoords.y;
         // Make it so that 0 is the center
@@ -54,7 +54,7 @@ namespace UntitledEngine {
     }
 
     // Simple AABB test to see if a box is in the camera view
-    bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
+    bool Camera3D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
 
         glm::vec2 scaledScreenDimensions = glm::vec2(_screenWidth, _screenHeight) / (_scale);
 

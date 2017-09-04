@@ -6,6 +6,8 @@
 
 namespace UntitledEngine {
 
+	const float ONE_NANOSEC = 1000000000.0f; // One nano second
+
 	void current_utc_time(struct timespec *ts) {
 		#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
 				clock_serv_t cclock;
@@ -43,32 +45,31 @@ namespace UntitledEngine {
 
 	size_t  getGameTicks(void) {
 
-		static struct timespec _start_time = {-1,-1}; // time of init
-		struct timespec current_time;       // time since init
-		struct timespec elapsed;
+		static struct timespec  _start_time = {-1,-1};  // time of init
+		struct timespec         current_time;           // time now
+		struct timespec         elapsed;                // time since init
 
 		if (_start_time.tv_sec == -1) // init
 			current_utc_time(&_start_time);
-		printf("start: %d.%09ld\n", (int)_start_time.tv_sec, (long)_start_time.tv_nsec);
-
-		//std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+		//printf("start: %d.%09ld\n", (int)_start_time.tv_sec, _start_time.tv_nsec); // debug
 
 		current_utc_time(&current_time);
-		printf("current: %d.%09ld\n", (int)current_time.tv_sec, (long)current_time.tv_nsec);
+		//printf("current: %d.%09ld\n", (int)current_time.tv_sec, current_time.tv_nsec); // debug
 
 		elapsed.tv_sec = current_time.tv_sec - _start_time.tv_sec;
 		if(current_time.tv_nsec >= _start_time.tv_nsec)
 			elapsed.tv_nsec = current_time.tv_nsec - _start_time.tv_nsec;
 		else    {
 			elapsed.tv_sec--;
-			elapsed.tv_nsec = 1000000000 + current_time.tv_nsec - _start_time.tv_nsec;
+			elapsed.tv_nsec = (long)ONE_NANOSEC + current_time.tv_nsec - _start_time.tv_nsec;
 		}
-		printf("elapsed: %d.%09ld\n", (int)elapsed.tv_sec, (long)elapsed.tv_nsec);
-		printf("elapsed: %lf\n", elapsed.tv_sec + elapsed.tv_nsec / 1000000000.0f);
-		printf("elapsed ms: %lf\n", (elapsed.tv_sec + elapsed.tv_nsec / 1000000000.0f) * 1000);
+		//printf("elapsed: %d.%09ld\n", (int)elapsed.tv_sec, elapsed.tv_nsec); // debug
+		//printf("elapsed: %lf\n", elapsed.tv_sec + (elapsed.tv_nsec / ONE_NANOSEC)); //debug
+		//printf("elapsed ms: %lf\n", (elapsed.tv_sec + (elapsed.tv_nsec / ONE_NANOSEC)) * 1000.0f); // debug
 
 
-		return ((size_t)((elapsed.tv_sec + elapsed.tv_nsec / 1000000000.0f) * 1000.0f));
+		// Return time in milliseconds
+		return ((size_t)((elapsed.tv_sec + (elapsed.tv_nsec / ONE_NANOSEC)) * 1000.0f));
 	}
 
 }

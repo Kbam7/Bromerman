@@ -186,10 +186,10 @@ void MainGame::initLevel() {
 
 	// Set up the players guns
 	const float BULLET_SPEED = 20.0f;
-	m_player->addGun(new Gun("Magnum", 10, 1, 0.1f, 30,
-	                         BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*/));
-	m_player->addGun(new Gun("Shotgun", 60, 12, 0.8f, 4,
-	                         BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
+	m_player->addGun(
+			new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*/));
+	m_player->addGun(
+			new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
 	m_player->addGun(
 			new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")*/));
 	m_player->addGun(
@@ -213,8 +213,6 @@ void MainGame::gameLoop() {
 	const float UNITS_PER_SECOND = 1000;  // Number of units in a second
 	const float DESIRED_FRAMETIME = UNITS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
 	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
-	//const float ONE_NANOSEC = 1000000000; // One nano second
-	//const float GAME_SPEED = ((ONE_NANOSEC / DESIRED_FPS) / 100) * 100;
 
 	// Used to cap the FPS
 	UntitledEngine::FpsLimiter fpsLimiter;
@@ -226,12 +224,6 @@ void MainGame::gameLoop() {
 
 	float previousTicks = UntitledEngine::getGameTicks();
 
-	std::cout << "first previousTicks: " << previousTicks
-			<< "\nUntitledEngine::getGameTicks(): " << UntitledEngine::getGameTicks()
-			<< "\nUntitledEngine::getGameTicks(): " << (UntitledEngine::getGameTicks())
-			<< "\nDESIRED_FRAMETIME: " << DESIRED_FRAMETIME
-			<< "\nUNITS_PER_SECOND: " << UNITS_PER_SECOND << std::endl;
-
 	// Main loop
 	while (m_gameState == GameState::PLAY) {
 		fpsLimiter.begin();
@@ -239,11 +231,6 @@ void MainGame::gameLoop() {
 		// Calculate the frameTime in milliseconds
 		float newTicks = UntitledEngine::getGameTicks();
 		float frameTime = ((newTicks - previousTicks));
-
-		std::cout << "newTicks: " << newTicks
-		          << "\nprevTicks: " << previousTicks
-		          << "\nframeTime: " << frameTime
-		          << std::endl; // debug
 
 		previousTicks = newTicks; // Store newTicks in previousTicks so we can use it next frame
 		// Get the total delta time
@@ -281,8 +268,6 @@ void MainGame::gameLoop() {
 		m_fps = fpsLimiter.end();
 		std::cout << m_fps << std::endl;
 
-		/*int tmp;           // debug
-		std::cin >> tmp; // debug*/
 	}
 }
 
