@@ -1,5 +1,5 @@
 #include <iostream>
-#include <UntitledEngine.h>
+#include "UntitledEngine.h"
 #include "Timing.h"
 
 namespace UntitledEngine {
@@ -26,7 +26,7 @@ namespace UntitledEngine {
 		//Limit the FPS to the max FPS
 		if (1000.0f / _maxFPS > frameTicks) {
 			//SDL_Delay((Uint32)(1000.0f / _maxFPS - frameTicks));
-			std::cout << "--HERE--  frameTicks: " << frameTicks << "Sleeping for: " << (size_t) (1000.0f / _maxFPS - frameTicks) << " milliseconds\n";
+			//std::cout << "--HERE--  frameTicks: " << frameTicks << "Sleeping for: " << (size_t) (1000.0f / _maxFPS - frameTicks) << " milliseconds\n"; // debug
 			std::this_thread::sleep_for(std::chrono::milliseconds((size_t) (1000.0f / _maxFPS - frameTicks)));
 		}
 
