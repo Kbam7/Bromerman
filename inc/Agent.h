@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "UntitledEngine/include/SpriteBatch.h"
+#include "../UntitledEngine/include/SpriteBatch.h"
 
 const float AGENT_WIDTH = 60.0f;
 const float AGENT_RADIUS = AGENT_WIDTH / 2.0f;

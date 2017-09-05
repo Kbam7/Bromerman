@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <vector>
-#include "UntitledEngine/include/SpriteBatch.h"
+#include "../UntitledEngine/include/SpriteBatch.h"
 
 class Human;
 class Zombie;

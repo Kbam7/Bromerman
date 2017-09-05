@@ -1,9 +1,9 @@
-#include "MainGame.h"
+#include "../inc/MainGame.h"
 
-#include "UntitledEngine/include/UntitledEngine.h"
-#include "UntitledEngine/include/Timing.h"
-#include "UntitledEngine/include/UntitledEngineErrors.h"
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../UntitledEngine/include/UntitledEngine.h"
+#include "../UntitledEngine/include/Timing.h"
+#include "../UntitledEngine/include/UntitledEngineErrors.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 #include <random>
 #include <ctime>
 #include <algorithm>
@@ -12,8 +12,8 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <GLFW/glfw3.h>
 
-#include "Gun.h"
-#include "Zombie.h"
+#include "../inc/Gun.h"
+#include "../inc/Zombie.h"
 
 const float HUMAN_SPEED = 1.0f;
 const float ZOMBIE_SPEED = 1.3f;

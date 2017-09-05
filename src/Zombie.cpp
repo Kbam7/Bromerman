@@ -1,7 +1,7 @@
-#include "Zombie.h"
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../inc/Zombie.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 
-#include "Human.h"
+#include "../inc/Human.h"
 
 Zombie::Zombie()
 {

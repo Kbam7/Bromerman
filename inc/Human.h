@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Agent.h"
+#include "../inc/Agent.h"
 
-class Zombie : public Agent
+class Human : public Agent
 {
 public:
-    Zombie();
-    ~Zombie();
+    Human();
+    virtual ~Human();
 
     void init(float speed, glm::vec2 pos);
 
@@ -14,8 +14,8 @@ public:
                         std::vector<Human*>& humans,
                         std::vector<Zombie*>& zombies,
                         float deltaTime) override;
-private:
 
-    Human* getNearestHuman(std::vector<Human*>& humans);
+private:
+    int _frames;
 };
 

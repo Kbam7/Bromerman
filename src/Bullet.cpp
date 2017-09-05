@@ -1,10 +1,10 @@
-#include "Bullet.h"
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../inc/Bullet.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 
-#include "Agent.h"
-#include "Human.h"
-#include "Zombie.h"
-#include "Level.h"
+#include "../inc/Agent.h"
+#include "../inc/Human.h"
+#include "../inc/Zombie.h"
+#include "../inc/Level.h"
 
 Bullet::Bullet(glm::vec2 position, glm::vec2 direction, float damage, float speed) :
     _position(position),

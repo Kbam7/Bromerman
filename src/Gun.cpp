@@ -1,4 +1,4 @@
-#include "Gun.h"
+#include "../inc/Gun.h"
 #include <random>
 #include <ctime>
 #include <glm/gtx/rotate_vector.hpp>

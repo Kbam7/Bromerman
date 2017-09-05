@@ -1,4 +1,4 @@
-#include "MainGame.h"
+#include "../inc/MainGame.h"
 
 //#include <cstdio>
 //#include <iostream>
@@ -6,7 +6,7 @@
 //#include <GL/glew.h>
 //#include <GLFW/glfw3.h>
 //#include <glm/glm.hpp>
-#include "UntitledEngine/include/GLSLProgram.h"
+#include "../UntitledEngine/include/GLSLProgram.h"
 
 //GLuint  LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
 //

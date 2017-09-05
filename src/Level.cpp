@@ -1,9 +1,9 @@
-#include "Level.h"
+#include "../inc/Level.h"
 
-#include "UntitledEngine/include/UntitledEngineErrors.h"
+#include "../UntitledEngine/include/UntitledEngineErrors.h"
 #include <fstream>
 #include <iostream>
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 
 Level::Level(const std::string& fileName) {
 

@@ -18,6 +18,9 @@ brew link --overwrite sdl2_ttf
 brew install sdl2_mixer             #SDL2_mixer
 brew link --overwrite sdl2_mixer
 
+#pulling nanogui into project
+git clone --recursive https://github.com/wjakob/nanogui.git lib/nanogui
+
 #brew install hg                                         #HG - For pulling from BitBucket
 #hg clone https://bitbucket.org/cegui/cegui              #CEGUI
 #hg clone https://bitbucket.org/cegui/cegui-dependencies #CEGUI Dependencies

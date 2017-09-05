@@ -1,7 +1,7 @@
-#include "Player.h"
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../inc/Player.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 
-#include "Gun.h"
+#include "../inc/Gun.h"
 
 #include <iostream> // debug
 #include <GLFW/glfw3.h>

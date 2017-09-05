@@ -1,18 +1,18 @@
 #pragma once
 
-#include "UntitledEngine/include/Window.h"
-#include "UntitledEngine/include/GLSLProgram.h"
-#include "UntitledEngine/include/Camera2D.h"
-#include "UntitledEngine/include/InputManager.h"
-#include "UntitledEngine/include/SpriteBatch.h"
+#include "../UntitledEngine/include/Window.h"
+#include "../UntitledEngine/include/GLSLProgram.h"
+#include "../UntitledEngine/include/Camera2D.h"
+#include "../UntitledEngine/include/InputManager.h"
+#include "../UntitledEngine/include/SpriteBatch.h"
 //#include "UntitledEngine/include/SpriteFont.h"
 //#include "UntitledEngine/include/AudioEngine.h"
-#include "UntitledEngine/include/ParticleEngine2D.h"
-#include "UntitledEngine/include/ParticleBatch2D.h"
+#include "../UntitledEngine/include/ParticleEngine2D.h"
+#include "../UntitledEngine/include/ParticleBatch2D.h"
 
-#include "Player.h"
-#include "Level.h"
-#include "Bullet.h"
+#include "../inc/Player.h"
+#include "../inc/Level.h"
+#include "../inc/Bullet.h"
 
 #include <GLFW/glfw3.h>
 

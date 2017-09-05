@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Human.h"
-#include "UntitledEngine/include/InputManager.h"
-#include "UntitledEngine/include/Camera2D.h"
-#include "Bullet.h"
+#include "../inc/Human.h"
+#include "../UntitledEngine/include/InputManager.h"
+#include "../UntitledEngine/include/Camera2D.h"
+#include "../inc/Bullet.h"
 
 class Gun;
 

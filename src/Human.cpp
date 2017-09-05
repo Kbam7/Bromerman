@@ -1,8 +1,8 @@
-#include "Human.h"
+#include "../inc/Human.h"
 #include <ctime>
 #include <random>
 #include <glm/gtx/rotate_vector.hpp>
-#include "UntitledEngine/include/ResourceManager.h"
+#include "../UntitledEngine/include/ResourceManager.h"
 
 Human::Human() :
     _frames(0)
