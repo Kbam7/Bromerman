@@ -211,7 +211,7 @@ void MainGame::gameLoop() {
 
 	// Some helpful constants.
 	const float DESIRED_FPS = 60.0f; // FPS the game is designed to run at
-	const int MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
+	const int   MAX_PHYSICS_STEPS = 6; // Max number of physics steps per frame
 	const float UNITS_PER_SECOND = 1000;  // Number of units in a second
 	const float DESIRED_FRAMETIME = UNITS_PER_SECOND / DESIRED_FPS; // The desired frame time per frame
 	const float MAX_DELTA_TIME = 1.0f; // Maximum size of deltaTime
