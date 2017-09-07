@@ -29,6 +29,11 @@ IF (GLM_FOUND)
 	message("\n\r")
 ENDIF ()
 
+add_subdirectory(lib/nanogui)
+include_directories(lib/nanogui/include)
+include_directories(${NANOGUI_EXTRA_INCS})
+add_definitions(${NANOGUI_EXTRA_DEFS})
+
 add_subdirectory(UntitledEngine)
 
 # - Directories for headers
@@ -48,7 +53,7 @@ link_directories(
 )
 
 # - Executeable
-set(SOURCE_FILES src/main.cpp src/Agent.cpp src/Zombie.cpp src/Human.cpp src/Gun.cpp src/Bullet.cpp src/Level.cpp src/Player.cpp src/MainGame.cpp)
+set(SOURCE_FILES src/main.cpp src/Agent.cpp src/Zombie.cpp src/Human.cpp src/Gun.cpp src/Bullet.cpp src/Level.cpp src/Player.cpp src/MainGame.cpp src/MainMenu.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 # - Link to library
@@ -59,6 +64,8 @@ target_link_libraries(${PROJECT_NAME}
 		${GLEW_LIBRARIES}
 		${GLFW3_LIBRARIES}
 		${GLM_LIBRARIES}
+		nanogui
+		${NANOGUI_EXTRA_LIBS}
 		)
 
 message(STATUS ${PROJECT_BINARY_DIR})

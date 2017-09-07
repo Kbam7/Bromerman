@@ -72,7 +72,7 @@ MainGame::MainGame() :
 		m_player(nullptr),
 		m_numHumansKilled(0),
 		m_numZombiesKilled(0),
-		m_gameState(GameState::PLAY) {
+		m_gameState(GAMESTATE::MENU) {
 	// Empty
 
 }
@@ -91,31 +91,25 @@ MainGame::~MainGame() {
 	}
 }
 
-void MainGame::run() {
+void MainGame::run(GLFWwindow *window) { // find the type 1st
 
-	initSystems();
-
+	initSystems(window);
 	initLevel();
-
 	//UntitledEngine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
 	//music.play(-1);
-
 	gameLoop();
 }
 
-void MainGame::initSystems() {
+void MainGame::initSystems(GLFWwindow *window) {
 	// Initialize the game engine
 	UntitledEngine::init();
 
 	// Initialize sound, must happen after UntitledEngine::init
 	//m_audioEngine.init();
-
-	// Create our window
-	m_window.create("ZombieGame", m_screenWidth, m_screenHeight, 0);
-
+	// Create our window 
+	m_window.create(window, m_screenWidth, m_screenHeight, 0); // use nano GUI window
 	// Set window data for callback functions
 	glfwSetWindowUserPointer(m_window.getWindow(), &m_inputManager);
-
 	// Set callbacks
 	glfwSetKeyCallback(m_window.getWindow(), &key_callback);
 	glfwSetCursorPosCallback(m_window.getWindow(), &cursor_position_callback);
@@ -225,7 +219,7 @@ void MainGame::gameLoop() {
 	float previousTicks = UntitledEngine::getGameTicks();
 
 	// Main loop
-	while (m_gameState == GameState::PLAY) {
+	while (m_gameState == GAMESTATE::PLAY) {
 		fpsLimiter.begin();
 
 		// Calculate the frameTime in milliseconds
@@ -421,7 +415,7 @@ void MainGame::checkVictory() {
 void MainGame::processInput() {
 	glfwPollEvents();
 	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q))
-		m_gameState = GameState::EXIT;
+		m_gameState = GAMESTATE::EXIT;
 }
 
 void MainGame::drawGame() {
@@ -522,4 +516,14 @@ void MainGame::addBlood(const glm::vec2 &position, int numParticles) {
 	for (int i = 0; i < numParticles; i++) {
 		m_bloodParticleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 30.0f);
 	}
+}
+
+GAMESTATE MainGame::getGameState()
+{
+	return m_gameState;
+}
+
+void	MainGame::setGameState(GAMESTATE gamestate)
+{
+	m_gameState = gamestate;
 }

@@ -17,6 +17,7 @@ namespace UntitledEngine {
 		~Window();
 
 		int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
+		int create(GLFWwindow *win, int screenWidth, int screenHeight, unsigned int currentFlags);
 
 		void swapBuffer();
 

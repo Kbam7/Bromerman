@@ -1,4 +1,5 @@
 #include "../inc/MainGame.h"
+#include "../inc/MainMenu.h"
 
 //#include <cstdio>
 //#include <iostream>
@@ -20,8 +21,24 @@
 //}
 
 int main(void) {
-    MainGame mainGame;
-    mainGame.run();
+
+    MainGame    *mainGame;
+    MainMenu    mainMenu;
+    GLFWwindow  *window;
+
+    nanogui::init();
+    // create the window and pass it to main game
+    mainGame = nullptr;
+    mainMenu.initMenu(750, 750, mainGame , true, false);
+    mainMenu.buildMenuWindows(1280.0f, 760.0f);
+
+    window = mainMenu.getGlfwWindow();
+
+    mainGame->run(window);
+
+    nanogui::shutdown();
+    return 0;
+} 
 //    GLSLProgram textureProgram;
 //
 //    // Initialise GLFW
@@ -112,8 +129,7 @@ int main(void) {
 //    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
 //           glfwWindowShouldClose(window) == 0 );
 
-    return 0;
-}
+
 
 //
 //#include <fstream>
