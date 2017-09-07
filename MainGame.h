@@ -2,7 +2,7 @@
 
 #include "UntitledEngine/include/Window.h"
 #include "UntitledEngine/include/GLSLProgram.h"
-#include "UntitledEngine/include/Camera2D.h"
+#include "UntitledEngine/include/Camera3D.h"
 #include "UntitledEngine/include/InputManager.h"
 #include "UntitledEngine/include/SpriteBatch.h"
 //#include "UntitledEngine/include/SpriteFont.h"
@@ -78,8 +78,8 @@ private:
 
 	UntitledEngine::InputManager m_inputManager; ///< Handles input
 
-	UntitledEngine::Camera2D m_camera; ///< Main Camera
-	UntitledEngine::Camera2D m_hudCamera; ///< Hud Camera
+	UntitledEngine::Camera3D m_camera; ///< Main Camera
+	UntitledEngine::Camera3D m_hudCamera; ///< Hud Camera
 
 	UntitledEngine::SpriteBatch m_agentSpriteBatch; ///< Draws all agents
 	UntitledEngine::SpriteBatch m_hudSpriteBatch;

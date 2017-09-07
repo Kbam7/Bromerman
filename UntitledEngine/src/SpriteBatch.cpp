@@ -10,19 +10,19 @@ namespace UntitledEngine {
         depth(Depth) {
 
         topLeft.color = color;
-        topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+        topLeft.setPosition(destRect.x, destRect.y + destRect.w, depth);
         topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
 
         bottomLeft.color = color;
-        bottomLeft.setPosition(destRect.x, destRect.y);
+        bottomLeft.setPosition(destRect.x, destRect.y, depth);
         bottomLeft.setUV(uvRect.x, uvRect.y);
 
         bottomRight.color = color;
-        bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+        bottomRight.setPosition(destRect.x + destRect.z, destRect.y, depth);
         bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
         topRight.color = color;
-        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w, depth);
         topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
     }
 
@@ -45,19 +45,19 @@ namespace UntitledEngine {
         tr = rotatePoint(tr, angle) + halfDims;
 
         topLeft.color = color;
-        topLeft.setPosition(destRect.x + tl.x, destRect.y + tl.y);
+        topLeft.setPosition(destRect.x + tl.x, destRect.y + tl.y, depth);
         topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
 
         bottomLeft.color = color;
-        bottomLeft.setPosition(destRect.x + bl.x, destRect.y + bl.y);
+        bottomLeft.setPosition(destRect.x + bl.x, destRect.y + bl.y, depth);
         bottomLeft.setUV(uvRect.x, uvRect.y);
 
         bottomRight.color = color;
-        bottomRight.setPosition(destRect.x + br.x, destRect.y + br.y);
+        bottomRight.setPosition(destRect.x + br.x, destRect.y + br.y, depth);
         bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
         topRight.color = color;
-        topRight.setPosition(destRect.x + tr.x, destRect.y + tr.y);
+        topRight.setPosition(destRect.x + tr.x, destRect.y + tr.y, depth);
         topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
     }
 
@@ -208,7 +208,7 @@ void SpriteBatch::createVertexArray() {
     // Bind the VAO. All subsequent opengl calls will modify it's state.
     glBindVertexArray(_vao);
 
-    //G enerate the VBO if it isn't already generated
+    //Generate the VBO if it isn't already generated
     if (_vbo == 0) {
         glGenBuffers(1, &_vbo);
     }

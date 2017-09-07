@@ -2,7 +2,7 @@
 
 #include "Human.h"
 #include "UntitledEngine/include/InputManager.h"
-#include "UntitledEngine/include/Camera2D.h"
+#include "UntitledEngine/include/Camera3D.h"
 #include "Bullet.h"
 
 class Gun;
@@ -13,7 +13,7 @@ public:
     Player();
     ~Player();
 
-    void init(float speed, glm::vec2 pos, UntitledEngine::InputManager* inputManager, UntitledEngine::Camera2D* camera, std::vector<Bullet>* bullets);
+    void init(float speed, glm::vec3 pos, UntitledEngine::InputManager* inputManager, UntitledEngine::Camera3D* camera, std::vector<Bullet>* bullets);
 
     void addGun(Gun* gun);
 
@@ -27,7 +27,7 @@ private:
     std::vector<Gun*> _guns;
     int _currentGunIndex;
 
-    UntitledEngine::Camera2D* _camera;
+    UntitledEngine::Camera3D* _camera;
     std::vector<Bullet>* _bullets;
 
 };

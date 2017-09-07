@@ -15,7 +15,7 @@
 #include "Gun.h"
 #include "Zombie.h"
 
-const float HUMAN_SPEED = 1.0f;
+//const float HUMAN_SPEED = 1.0f;
 const float ZOMBIE_SPEED = 1.3f;
 const float PLAYER_SPEED = 5.0f;
 
@@ -82,13 +82,13 @@ MainGame::~MainGame() {
 	for (size_t i = 0; i < m_levels.size(); i++) {
 		delete m_levels[i];
 	}
-	// Don't forget to delete the humans and zombies!
+/*	// Don't forget to delete the humans and zombies!
 	for (size_t i = 0; i < m_humans.size(); i++) {
 		delete m_humans[i];
 	}
 	for (size_t i = 0; i < m_zombies.size(); i++) {
 		delete m_zombies[i];
-	}
+	}*/
 }
 
 void MainGame::run() {
@@ -128,29 +128,31 @@ void MainGame::initSystems() {
 	initShaders();
 
 	// Initialize our spritebatch
-	m_agentSpriteBatch.init();
-	m_hudSpriteBatch.init();
+	//m_agentSpriteBatch.init();
+	//m_hudSpriteBatch.init();
 
 	// Initialize sprite font
 	//m_spriteFont = new UntitledEngine::SpriteFont("../Fonts/chintzy.ttf", 64);
 
 	// Set up the camera
 	m_camera.init(m_screenWidth, m_screenHeight);
-	m_hudCamera.init(m_screenWidth, m_screenHeight);
-	m_hudCamera.setPosition(glm::vec2(m_screenWidth / 2, m_screenHeight / 2));
+	//m_hudCamera.init(m_screenWidth, m_screenHeight);
+	//m_hudCamera.setPosition(glm::vec3(m_screenWidth / 2, m_screenHeight / 2, 0.0f));
 
 	// Initialize particles
-	m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
+	//m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
 
 	// Initialize the particle batch and use a lambda function to define the update
+/*
 	m_bloodParticleBatch->init(1000, 0.05f,
 	                           UntitledEngine::ResourceManager::getTexture("../Textures/particle.png"),
 	                           [](UntitledEngine::Particle2D &particle, float deltaTime) {
 		                           particle.position += particle.velocity * deltaTime;
 		                           particle.color.a = (GLubyte) (particle.life * 255.0f);
 	                           });
+*/
 
-	m_particleEngine.addParticleBatch(m_bloodParticleBatch);
+	//m_particleEngine.addParticleBatch(m_bloodParticleBatch);
 
 }
 
@@ -162,7 +164,7 @@ void MainGame::initLevel() {
 	m_player = new Player();
 	m_player->init(PLAYER_SPEED, m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera, &m_bullets);
 
-	m_humans.push_back(m_player);
+	//m_humans.push_back(m_player);
 
 	std::mt19937 randomEngine;
 	randomEngine.seed(time(nullptr));
@@ -171,29 +173,29 @@ void MainGame::initLevel() {
 	std::uniform_int_distribution<int> randY(2, m_levels[m_currentLevel]->getHeight() - 2);
 
 	// Add all the random humans
-	for (int i = 0; i < m_levels[m_currentLevel]->getNumHumans(); i++) {
+/*	for (int i = 0; i < m_levels[m_currentLevel]->getNumHumans(); i++) {
 		m_humans.push_back(new Human);
-		glm::vec2 pos(randX(randomEngine) * TILE_WIDTH, randY(randomEngine) * TILE_WIDTH);
+		glm::vec3 pos(randX(randomEngine) * TILE_WIDTH, randY(randomEngine) * TILE_WIDTH, 0.0f);
 		m_humans.back()->init(HUMAN_SPEED, pos);
 	}
 
 	// Add the zombies
-	const std::vector<glm::vec2> &zombiePositions = m_levels[m_currentLevel]->getZombieStartPositions();
+	const std::vector<glm::vec3> &zombiePositions = m_levels[m_currentLevel]->getZombieStartPositions();
 	for (size_t i = 0; i < zombiePositions.size(); i++) {
 		m_zombies.push_back(new Zombie);
 		m_zombies.back()->init(ZOMBIE_SPEED, zombiePositions[i]);
-	}
+	}*/
 
 	// Set up the players guns
-	const float BULLET_SPEED = 20.0f;
+/*	const float BULLET_SPEED = 20.0f;
 	m_player->addGun(
-			new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*/));
+			new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*//*));
 	m_player->addGun(
-			new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
+			new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*//*));
 	m_player->addGun(
-			new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED/*, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")*/));
+			new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")*//*));
 	m_player->addGun(
-			new Gun("BOMB", 80, 1, 0.0f, 50, 0/*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*/));
+			new Gun("BOMB", 80, 1, 0.0f, 50, 0*//*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*//*));*/
 }
 
 void MainGame::initShaders() {
@@ -236,7 +238,7 @@ void MainGame::gameLoop() {
 		// Get the total delta time
 		float totalDeltaTime = (frameTime / DESIRED_FRAMETIME);
 
-		checkVictory();
+		//checkVictory();
 
 		m_inputManager.update();
 
@@ -248,9 +250,9 @@ void MainGame::gameLoop() {
 			// The deltaTime should be the the smaller of the totalDeltaTime and MAX_DELTA_TIME
 			float deltaTime = std::min(totalDeltaTime, MAX_DELTA_TIME);
 			// Update all physics here and pass in deltaTime
-			updateAgents(deltaTime);
-			updateBullets(deltaTime);
-			m_particleEngine.update(deltaTime);
+			//updateAgents(deltaTime);
+			//updateBullets(deltaTime);
+			//m_particleEngine.update(deltaTime);
 			// Since we just took a step that is length deltaTime, subtract from totalDeltaTime
 			totalDeltaTime -= deltaTime;
 			// Increment our frame counter so we can limit steps to MAX_PHYSICS_STEPS
@@ -258,9 +260,9 @@ void MainGame::gameLoop() {
 		}
 
 		// Make sure the camera is bound to the player position
-		m_camera.setPosition(m_player->getPosition());
+		//m_camera.setPosition(m_player->getPosition());
 		m_camera.update();
-		m_hudCamera.update();
+		//m_hudCamera.update();
 
 		drawGame();
 
@@ -420,8 +422,29 @@ void MainGame::checkVictory() {
 
 void MainGame::processInput() {
 	glfwPollEvents();
-	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q))
+
+	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q)) {
 		m_gameState = GameState::EXIT;
+		return;
+	}
+
+	// Vertical Movements
+	if (m_inputManager.isKeyDown(GLFW_KEY_W))
+		m_camera.offsetPosition(glm::vec3(0, -1.0f * PLAYER_SPEED, 0));
+	else if (m_inputManager.isKeyDown(GLFW_KEY_S))
+		m_camera.offsetPosition(glm::vec3(0, 1 * PLAYER_SPEED, 0));
+
+	// Horizontal Movements
+	if (m_inputManager.isKeyDown(GLFW_KEY_A))
+		m_camera.offsetPosition(glm::vec3(1 * PLAYER_SPEED, 0, 0));
+	else if (m_inputManager.isKeyDown(GLFW_KEY_D))
+		m_camera.offsetPosition(glm::vec3(-1 * PLAYER_SPEED, 0, 0));
+
+	// Zoom
+	if (m_inputManager.isKeyDown(GLFW_KEY_Z))
+		m_camera.offsetScale(0.005f);
+	else if (m_inputManager.isKeyDown(GLFW_KEY_X))
+		m_camera.offsetScale(-0.005f);
 }
 
 void MainGame::drawGame() {
@@ -441,14 +464,14 @@ void MainGame::drawGame() {
 
 	// Grab the camera matrix
 	glm::mat4 projectionMatrix = m_camera.getCameraMatrix();
-	GLint pUniform = m_textureProgram.getUniformLocation("P");
-	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+	GLint mvpUniform = m_textureProgram.getUniformLocation("MVP");
+	glUniformMatrix4fv(mvpUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
 	// Draw the level
 	m_levels[m_currentLevel]->draw();
 
 	// Begin drawing agents
-	m_agentSpriteBatch.begin();
+	/*m_agentSpriteBatch.begin();
 
 	const glm::vec2 agentDims(AGENT_RADIUS * 2.0f);
 
@@ -482,7 +505,7 @@ void MainGame::drawGame() {
 
 	// Render the heads up display
 	drawHud();
-
+*/
 	// Unbind the program
 	m_textureProgram.unuse();
 
@@ -494,8 +517,8 @@ void MainGame::drawHud() {
 	char buffer[256];
 
 	glm::mat4 projectionMatrix = m_hudCamera.getCameraMatrix();
-	GLint pUniform = m_textureProgram.getUniformLocation("P");
-	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+	GLint mvpUniform = m_textureProgram.getUniformLocation("MVP");
+	glUniformMatrix4fv(mvpUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
 	m_hudSpriteBatch.begin();
 

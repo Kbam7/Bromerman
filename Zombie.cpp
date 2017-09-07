@@ -11,7 +11,7 @@ Zombie::~Zombie()
 {
 }
 
-void Zombie::init(float speed, glm::vec2 pos) {
+void Zombie::init(float speed, glm::vec3 pos) {
     _speed = speed;
     _position = pos;
     _health = 50;
@@ -47,7 +47,7 @@ Human* Zombie::getNearestHuman(std::vector<Human*>& humans) {
 
     for (size_t i = 0; i < humans.size(); i++) {
         // Get the direction vector
-        glm::vec2 distVec = humans[i]->getPosition() - _position;
+        glm::vec3 distVec = humans[i]->getPosition() - _position;
         // Get distance
         float distance = glm::length(distVec);
 

@@ -32,13 +32,13 @@ namespace UntitledEngine {
 		bool wasKeyDown(unsigned int keyID);
 
 		//getters
-		glm::vec2 getMouseCoords() const { return _mouseCoords; }
+		glm::vec3 getMouseCoords() const { return _mouseCoords; }
 
 	private:
 
 		std::unordered_map<unsigned int, bool> _keyMap;
 		std::unordered_map<unsigned int, bool> _previousKeyMap;
-		glm::vec2 _mouseCoords;
+		glm::vec3 _mouseCoords;
 	};
 
 }

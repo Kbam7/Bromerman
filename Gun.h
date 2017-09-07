@@ -13,13 +13,13 @@ public:
         float spread, float bulletDamage, float bulletSpeed/*, UntitledEngine::SoundEffect fireEffect*/);
     ~Gun();
 
-    void update(bool isMouseDown, const glm::vec2& position, const glm::vec2& direction, std::vector<Bullet>& bullets, float deltaTime);
+    void update(bool isMouseDown, const glm::vec3& position, const glm::vec3& direction, std::vector<Bullet>& bullets, float deltaTime);
 
 private:
 
     //UntitledEngine::SoundEffect m_fireEffect;
 
-    void fire(const glm::vec2& direction, const glm::vec2& position, std::vector<Bullet>& bullets);
+    void fire(const glm::vec3& direction, const glm::vec3& position, std::vector<Bullet>& bullets);
 
     std::string _name;
 

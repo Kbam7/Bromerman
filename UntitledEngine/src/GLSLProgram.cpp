@@ -1,5 +1,5 @@
-#include "include/GLSLProgram.h"
-#include "include/IOManager.h"
+#include "GLSLProgram.h"
+#include "IOManager.h"
 #include "../include/UntitledEngineErrors.h"
 
 #include <vector>

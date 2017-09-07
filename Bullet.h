@@ -13,7 +13,7 @@ const int BULLET_RADIUS = 5;
 class Bullet
 {
 public:
-    Bullet(glm::vec2 position, glm::vec2 direction, float damage, float speed);
+    Bullet(glm::vec3 position, glm::vec3 direction, float damage, float speed);
     ~Bullet();
 
     // When update returns true, delete bullet
@@ -31,8 +31,8 @@ private:
 
     bool collideWithWorld(const std::vector<std::string>& levelData);
 
-    glm::vec2 _position;
-    glm::vec2 _direction;
+    glm::vec3 _position;
+    glm::vec3 _direction;
     float _damage;
     float _speed;
 };

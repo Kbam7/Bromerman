@@ -59,12 +59,12 @@ bool Agent::collideWithAgent(Agent* agent) {
     const float MIN_DISTANCE = AGENT_RADIUS * 2.0f;
 
     // Center position of this agent
-    glm::vec2 centerPosA = _position + glm::vec2(AGENT_RADIUS);
+    glm::vec3 centerPosA = _position + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0);
     // Center position of the parameter agent
-    glm::vec2 centerPosB = agent->getPosition() + glm::vec2(AGENT_RADIUS);
+    glm::vec3 centerPosB = agent->getPosition() + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0);
 
     // Distance vector between the two agents
-    glm::vec2 distVec = centerPosA - centerPosB;
+    glm::vec3 distVec = centerPosA - centerPosB;
     
     // Length of the distance vector
     float distance = glm::length(distVec);
@@ -76,7 +76,7 @@ bool Agent::collideWithAgent(Agent* agent) {
     if (collisionDepth > 0) {
 
         // Get the direction times the collision depth so we can push them away from each other
-        glm::vec2 collisionDepthVec = glm::normalize(distVec) * collisionDepth;
+        glm::vec3 collisionDepthVec = glm::normalize(distVec) * collisionDepth;
 
         // Push them in opposite directions
         _position += collisionDepthVec / 2.0f;
@@ -139,9 +139,9 @@ void Agent::collideWithTile(glm::vec2 tilePos) {
     const float MIN_DISTANCE = AGENT_RADIUS + TILE_RADIUS;
 
     // Center position of the agent
-    glm::vec2 centerAgentPos = _position + glm::vec2(AGENT_RADIUS);
+    glm::vec3 centerAgentPos = _position + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0.0f);
     // Vector from the agent to the tile
-    glm::vec2 distVec = centerAgentPos - tilePos;
+    glm::vec3 distVec = centerAgentPos - glm::vec3(tilePos, 0.0f);
 
     // Get the depth of the collision
     float xDepth = MIN_DISTANCE - std::abs(distVec.x);

@@ -6,7 +6,7 @@
 #include "Zombie.h"
 #include "Level.h"
 
-Bullet::Bullet(glm::vec2 position, glm::vec2 direction, float damage, float speed) :
+Bullet::Bullet(glm::vec3 position, glm::vec3 direction, float damage, float speed) :
     _position(position),
     _direction(direction),
     _damage(damage),
@@ -44,10 +44,10 @@ void Bullet::draw(UntitledEngine::SpriteBatch& spriteBatch) {
 bool Bullet::collideWithAgent(Agent* agent) {
     const float MIN_DISTANCE = AGENT_RADIUS + BULLET_RADIUS;
 
-    glm::vec2 centerPosA = _position;
-    glm::vec2 centerPosB = agent->getPosition() + glm::vec2(AGENT_RADIUS);
+    glm::vec3 centerPosA = _position;
+    glm::vec3 centerPosB = agent->getPosition() + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0.0f);
 
-    glm::vec2 distVec = centerPosA - centerPosB;
+    glm::vec3 distVec = centerPosA - centerPosB;
 
     float distance = glm::length(distVec);
 

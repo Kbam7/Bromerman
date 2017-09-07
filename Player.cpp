@@ -15,7 +15,7 @@ Player::~Player() {
     // Empty
 }
 
-void Player::init(float speed, glm::vec2 pos, UntitledEngine::InputManager* inputManager, UntitledEngine::Camera2D* camera, std::vector<Bullet>* bullets) {
+void Player::init(float speed, glm::vec3 pos, UntitledEngine::InputManager* inputManager, UntitledEngine::Camera3D* camera, std::vector<Bullet>* bullets) {
     _speed = speed;
     _position = pos;
     _inputManager = inputManager;
@@ -68,11 +68,11 @@ void Player::update(const std::vector<std::string>& levelData,
         _currentGunIndex = 3;
     }
 
-    glm::vec2 mouseCoords = _inputManager->getMouseCoords();
+    glm::vec3 mouseCoords = _inputManager->getMouseCoords();
     mouseCoords = _camera->convertScreenToWorld(mouseCoords);
 
 
-    glm::vec2 centerPosition = _position + glm::vec2(AGENT_RADIUS);
+    glm::vec3 centerPosition = _position + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0.0f);
 
     m_direction = glm::normalize(mouseCoords - centerPosition);
 
