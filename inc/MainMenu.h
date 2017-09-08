@@ -15,7 +15,7 @@ private:
 	nanogui::Screen     *_screen;
 	nanogui::Window     *_startMenu;
 	nanogui::Window     *_startGameMenu;
-	nanogui::Window     *_pauseGameMenu;
+	//nanogui::Window     *_pauseGameMenu;
 	nanogui::Window     *_exitWindow;
 	MainGame            *_mainGame;
 
@@ -25,15 +25,14 @@ private:
 	void    _createStartGameMenu(float width, float height);
 	void    _createPauseGameMenu(float width, float height);
 //	void    _createSettingsMenu(float width, float height);
-//	void    _createBackground(float width, float height);
 	void    _createExitWindow(float width, float height);
 
 public:
-	MainMenu() = default;
+	MainMenu();
 	MainMenu(float width, float height, MainGame *mainGame, bool fullScreen = false, bool resizable = false);
 	MainMenu(const MainMenu & rhs);
 	MainMenu&   operator=(const MainMenu & rhs);
-	~MainMenu() = default;
+	~MainMenu();
 
 	bool    initMenu(float width, float height, MainGame *mainGame, bool fullScreen = false, bool resizable = false);
 	bool    startMenu();

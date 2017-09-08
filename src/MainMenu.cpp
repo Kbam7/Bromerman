@@ -4,9 +4,12 @@
 
 MainMenu*   MainMenu::activeMenu = nullptr;
 
-MainMenu::MainMenu(float width, float height, MainGame *mainGame, bool fullScreen, bool resizable)
+MainMenu::MainMenu()
 {
-	initMenu(width, height, mainGame, fullScreen, resizable);
+}
+
+MainMenu::~MainMenu()
+{
 }
 
 MainMenu::MainMenu(const MainMenu &rhs)
@@ -21,7 +24,6 @@ MainMenu& MainMenu::operator=(const MainMenu &rhs)
 		_screen = rhs._screen;
 		_startGameMenu = rhs._startGameMenu;
 		_startMenu = rhs._startMenu;
-		_pauseGameMenu = rhs._pauseGameMenu;
 		_mainGame = rhs._mainGame;
 	}
 	return *this;
@@ -32,12 +34,14 @@ bool MainMenu::initMenu(float width, float height, MainGame *mainGame, bool full
 	_mainGame = mainGame;
 	MainMenu::activeMenu = this;
 
-	_screen = new nanogui::Screen({width, height}, "Bomberman", resizable, fullScreen,
-		8, 8, 24, 8, 4, 4, 1);
+	_screen = new nanogui::Screen({width, height}, "Bomberman", fullScreen, resizable,
+		8, 8, 24, 8, 4, 4, 3);
 
-    _screen->setVisible(true);
+	_screen->setVisible(true);
+	
 	std::vector<void *> params;
 	params.push_back(this);
+	buildMenuWindows(1280.0f, 760.0f);
 	//MainGame::functions.insert(std::pair<const char *, Func>("menuUpdate", {Menu::updateMenu, params})); 
 	return true;
 }
@@ -46,10 +50,8 @@ bool MainMenu::buildMenuWindows(float width, float height)
 {
 	_createStartMenu(width, height);
 	_createStartGameMenu(width, height);
-	_createPauseGameMenu(width, height);
-//	_createBackground(width, height); useing opengl to create background
+//	_createPauseGameMenu(width, height);
     _createExitWindow(width, height);
-    //_createVivtoryWindow(width, height);
 	return true;
 }
 
@@ -70,7 +72,7 @@ void MainMenu::_createStartMenu(float width, float height)
     // what the button will do
 	startButton->setCallback([]{
 		activeMenu->_mainGame->setGameState(GAMESTATE::PLAY);
-		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST); // flags we need to set for the game
 		glDepthFunc(GL_LESS);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -78,12 +80,12 @@ void MainMenu::_createStartMenu(float width, float height)
 	});
 	/// options button
 	nanogui::Button *optionsButton = new nanogui::Button(_startMenu, "Options");
-	optionsButton->setPosition({50, 110});
-	optionsButton->setSize({150, 50});
+	optionsButton->setPosition({50, 100});
+	optionsButton->setSize({100, 50});
 	/// exit button
 	nanogui::Button *exitButton = new nanogui::Button(_startMenu, "Exit");
-	exitButton->setPosition({50, 180});
-	exitButton->setSize({150, 50});
+	exitButton->setPosition({50, 100});
+	exitButton->setSize({100, 50});
 	exitButton->setCallback([]{ MainMenu::exitButtonCallBack();});
 }
 
@@ -95,13 +97,6 @@ void MainMenu::_createStartGameMenu(float width, float height)
 	_startGameMenu->setVisible(false);
 }
 
-void MainMenu::_createPauseGameMenu(float width, float height)
-{
-	(void)width;
-	(void)height;
-	_pauseGameMenu = new nanogui::Window(_screen, "Pause");
-	_pauseGameMenu->setVisible(false);
-}
 
 void MainMenu::_createExitWindow(float width, float height)
 {
@@ -134,6 +129,26 @@ void MainMenu::_createExitWindow(float width, float height)
 	});
 }
 
+void MainMenu::exitButtonCallBack()
+{
+	activeMenu->_startMenu->setVisible(false);
+	activeMenu->_exitWindow->setVisible(true);
+}
+
+GLFWwindow* MainMenu::getGlfwWindow()
+{
+	return _screen->glfwWindow();
+}
+/*
+void MainMenu::_createPauseGameMenu(float width, float height)
+{
+	(void)width;
+	(void)height;
+	_pauseGameMenu = new nanogui::Window(_screen, "Pause");
+	_pauseGameMenu->setVisible(false);
+}
+*/
+
 /* how stephen made the background
 void MainMenu::_createBackground(float width, float height)
 {
@@ -145,7 +160,7 @@ void MainMenu::_createBackground(float width, float height)
 }
 */
 
-
+/*
 void MainMenu::updateMenu(MainGame *game, std::vector<void *> params)
 {
 	(void)game;
@@ -164,7 +179,8 @@ void MainMenu::updateMenu(MainGame *game, std::vector<void *> params)
 //		menu->_menuBg->render(glm::translate(glm::mat4(), {0, 0, -1}));
 //	}
 }
-
+*/
+/*
 bool MainMenu::mouseCallback(int button, int action, int mod)
 {
 	if (activeMenu != nullptr)
@@ -185,14 +201,5 @@ bool MainMenu::keyCallback(int key, int scancode, int action, int mods)
 	activeMenu->_screen->keyCallbackEvent(key, scancode, action, mods);
 	return true;
 }
+*/
 
-void MainMenu::exitButtonCallBack()
-{
-	activeMenu->_startMenu->setVisible(false);
-	activeMenu->_exitWindow->setVisible(true);
-}
-
-GLFWwindow* MainMenu::getGlfwWindow()
-{
-	return _screen->glfwWindow();
-}

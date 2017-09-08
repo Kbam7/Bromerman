@@ -30,7 +30,7 @@ int main(void) {
     // create the window and pass it to main game
     mainGame = nullptr;
     mainMenu.initMenu(750, 750, mainGame , true, false);
-    mainMenu.buildMenuWindows(1280.0f, 760.0f);
+   
 
     window = mainMenu.getGlfwWindow();
 

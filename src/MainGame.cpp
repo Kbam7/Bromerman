@@ -73,7 +73,6 @@ MainGame::MainGame() :
 		m_numHumansKilled(0),
 		m_numZombiesKilled(0),
 		m_gameState(GAMESTATE::MENU) {
-	// Empty
 
 }
 
