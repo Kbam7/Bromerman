@@ -11,9 +11,10 @@ find_package(PkgConfig REQUIRED)
 pkg_search_module(GLEW REQUIRED glew)
 pkg_search_module(GLFW3 REQUIRED glfw3)
 pkg_search_module(GLM REQUIRED glm)
+pkg_search_module(ASSIMP REQUIRED assimp)
 
 # - Directories for headers
-set(HEADER_FILES include/ ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} )
+set(HEADER_FILES include/ ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS}/../ )
 include_directories(BEFORE  ${HEADER_FILES})
 
 # - Directories for sources
@@ -29,5 +30,5 @@ set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/
 # - Add library
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES} ${HEADER_FILES})
 
-target_link_libraries (${PROJECT_NAME} ${OPENGL_LIBRARIES} ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} ${GLM_LIBRARIES} ${GLFW3_LIBRARIES} )
+target_link_libraries (${PROJECT_NAME} ${OPENGL_LIBRARIES} ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} ${GLM_LIBRARIES} ${GLFW3_LIBRARIES} ${ASSIMP_LIBRARIES} )
 target_include_directories (${PROJECT_NAME} PUBLIC ${HEADER_FILES})

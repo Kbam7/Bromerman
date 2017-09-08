@@ -94,7 +94,7 @@ private:
 	float m_fps;
 	int m_currentLevel;
 
-	Player *m_player;
+	//Player *m_player;
 	std::vector<Human *> m_humans; ///< Vector of all humans
 	std::vector<Zombie *> m_zombies; ///< Vector of all zombies
 	std::vector<Bullet> m_bullets;

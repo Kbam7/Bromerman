@@ -12,11 +12,11 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <GLFW/glfw3.h>
 
-#include "Gun.h"
-#include "Zombie.h"
+//#include "Gun.h"
+//#include "Zombie.h"
 
 //const float HUMAN_SPEED = 1.0f;
-const float ZOMBIE_SPEED = 1.3f;
+//const float ZOMBIE_SPEED = 1.3f;
 const float PLAYER_SPEED = 5.0f;
 
 // Key callback, set on initialisation
@@ -69,7 +69,7 @@ MainGame::MainGame() :
 		m_screenWidth(1024),
 		m_screenHeight(768),
 		m_fps(0),
-		m_player(nullptr),
+		//m_player(nullptr),
 		m_numHumansKilled(0),
 		m_numZombiesKilled(0),
 		m_gameState(GameState::PLAY) {
@@ -161,8 +161,8 @@ void MainGame::initLevel() {
 	m_levels.push_back(new Level("../Levels/level1.txt"));
 	m_currentLevel = 0;
 
-	m_player = new Player();
-	m_player->init(PLAYER_SPEED, m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera, &m_bullets);
+	//m_player = new Player();
+	//m_player->init(PLAYER_SPEED, m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera, &m_bullets);
 
 	//m_humans.push_back(m_player);
 
@@ -274,8 +274,9 @@ void MainGame::gameLoop() {
 }
 
 void MainGame::updateAgents(float deltaTime) {
+	(void)deltaTime;
 	// Update all humans
-	for (size_t i = 0; i < m_humans.size(); i++) {
+/*	for (size_t i = 0; i < m_humans.size(); i++) {
 		m_humans[i]->update(m_levels[m_currentLevel]->getLevelData(),
 		                    m_humans,
 		                    m_zombies,
@@ -321,13 +322,14 @@ void MainGame::updateAgents(float deltaTime) {
 		for (size_t j = i + 1; j < m_humans.size(); j++) {
 			m_humans[i]->collideWithAgent(m_humans[j]);
 		}
-	}
+	}*/
 
 	// Dont forget to update zombies
 }
 
 void MainGame::updateBullets(float deltaTime) {
-	// Update and collide with world
+	(void)deltaTime;
+/*	// Update and collide with world
 	for (size_t i = 0; i < m_bullets.size();) {
 		// If update returns true, the bullet collided with a wall
 		if (m_bullets[i].update(m_levels[m_currentLevel]->getLevelData(), deltaTime)) {
@@ -401,7 +403,7 @@ void MainGame::updateBullets(float deltaTime) {
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void MainGame::checkVictory() {
@@ -423,7 +425,8 @@ void MainGame::checkVictory() {
 void MainGame::processInput() {
 	glfwPollEvents();
 
-	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q)) {
+	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q)
+	        || glfwWindowShouldClose(m_window.getWindow()) == 0) {
 		m_gameState = GameState::EXIT;
 		return;
 	}
@@ -455,17 +458,32 @@ void MainGame::drawGame() {
 
 	m_textureProgram.use();
 
-	// Draw code goes here
-	glActiveTexture(GL_TEXTURE0);
 
-	// Make sure the shader uses texture 0
-	GLint textureUniform = m_textureProgram.getUniformLocation("mySampler");
+// Compute the MVP matrix from keyboard and mouse input
+	glm::mat4 ProjectionMatrix = m_camera.get_projectionMatrix();
+	glm::mat4 ViewMatrix = m_camera.get_viewMatrix();
+	glm::mat4 ModelMatrix = m_camera.get_modelMatrix();
+	glm::mat4 MVP = m_camera.getCameraMatrix();
+
+	// Send our transformation to the currently bound shader,
+	// in the "MVP" uniform
+	glUniformMatrix4fv(m_textureProgram.getUniformLocation("MVP"), 1, GL_FALSE, &MVP[0][0]);
+	glUniformMatrix4fv(m_textureProgram.getUniformLocation("M"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	glUniformMatrix4fv(m_textureProgram.getUniformLocation("V"), 1, GL_FALSE, &ViewMatrix[0][0]);
+
+	glm::vec3 lightPos = glm::vec3(4,4,4);
+	glUniform3f(m_textureProgram.getUniformLocation("LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
+
+	// Get a handle for our "myTextureSampler" uniform
+	GLuint textureUniform  = m_textureProgram.getUniformLocation("myTextureSampler");
+	// Load texture and/or get textureID
+	GLuint textureID = UntitledEngine::ResourceManager::getTexture(texturePath).id;
+	// Bind our texture in Texture Unit 0
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	// Set our "myTextureSampler" sampler to use Texture Unit 0
 	glUniform1i(textureUniform, 0);
 
-	// Grab the camera matrix
-	glm::mat4 projectionMatrix = m_camera.getCameraMatrix();
-	GLint mvpUniform = m_textureProgram.getUniformLocation("MVP");
-	glUniformMatrix4fv(mvpUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
 	// Draw the level
 	m_levels[m_currentLevel]->draw();

@@ -69,7 +69,7 @@ void Player::update(const std::vector<std::string>& levelData,
     }
 
     glm::vec3 mouseCoords = _inputManager->getMouseCoords();
-    mouseCoords = _camera->convertScreenToWorld(mouseCoords);
+    //mouseCoords = _camera->convertScreenToWorld(mouseCoords);
 
 
     glm::vec3 centerPosition = _position + glm::vec3(AGENT_RADIUS, AGENT_RADIUS, 0.0f);
