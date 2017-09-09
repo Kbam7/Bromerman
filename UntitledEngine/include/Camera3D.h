@@ -46,6 +46,8 @@ namespace UntitledEngine {
 
 		void set_modelMatrix(const glm::mat4 &_modelMatrix) { Camera3D::_modelMatrix = _modelMatrix; }
 
+		void set_mvpMatrix(const glm::mat4 &_mvpMatrix) { Camera3D::_mvpMatrix = _mvpMatrix; }
+
 		//getters
 		const glm::vec3 &getPosition() const { return _position; }
 
@@ -59,6 +61,8 @@ namespace UntitledEngine {
 
 		const glm::mat4 &get_modelMatrix() const { return _modelMatrix; }
 
+		const glm::mat4 &get_mvpMatrix() const { return _mvpMatrix; }
+
 		const glm::mat4 &getCameraMatrix() const { return _cameraMatrix; }
 
 	private:
@@ -70,8 +74,6 @@ namespace UntitledEngine {
 		glm::mat4 _projectionMatrix;
 		glm::mat4 _viewMatrix;
 		glm::mat4 _modelMatrix;
-
-	private:
 		glm::mat4 _mvpMatrix;
 	};
 

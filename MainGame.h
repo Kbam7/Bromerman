@@ -10,9 +10,10 @@
 #include "UntitledEngine/include/ParticleEngine2D.h"
 #include "UntitledEngine/include/ParticleBatch2D.h"
 
-#include "Player.h"
+//#include "Player.h"
 #include "Level.h"
-#include "Bullet.h"
+//#include "Bullet.h"
+#include "BasicObject.h"
 
 #include <GLFW/glfw3.h>
 
@@ -94,13 +95,14 @@ private:
 	float m_fps;
 	int m_currentLevel;
 
+	BasicObject *m_obj;
 	//Player *m_player;
-	std::vector<Human *> m_humans; ///< Vector of all humans
-	std::vector<Zombie *> m_zombies; ///< Vector of all zombies
-	std::vector<Bullet> m_bullets;
+	//std::vector<Human *> m_humans; ///< Vector of all humans
+	//std::vector<Zombie *> m_zombies; ///< Vector of all zombies
+	//std::vector<Bullet> m_bullets;
 
-	int m_numHumansKilled; ///< Humans killed by player
-	int m_numZombiesKilled; ///< Zombies killed by player
+	//int m_numHumansKilled; ///< Humans killed by player
+	//int m_numZombiesKilled; ///< Zombies killed by player
 
 	//UntitledEngine::SpriteFont*    m_spriteFont;
 

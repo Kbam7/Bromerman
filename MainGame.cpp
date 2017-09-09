@@ -4,6 +4,7 @@
 #include "UntitledEngine/include/Timing.h"
 #include "UntitledEngine/include/UntitledEngineErrors.h"
 #include "UntitledEngine/include/ResourceManager.h"
+#include "BasicObject.h"
 #include <random>
 #include <ctime>
 #include <algorithm>
@@ -70,8 +71,8 @@ MainGame::MainGame() :
 		m_screenHeight(768),
 		m_fps(0),
 		//m_player(nullptr),
-		m_numHumansKilled(0),
-		m_numZombiesKilled(0),
+		//m_numHumansKilled(0),
+		//m_numZombiesKilled(0),
 		m_gameState(GameState::PLAY) {
 	// Empty
 
@@ -100,6 +101,15 @@ void MainGame::run() {
 	//UntitledEngine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
 	//music.play(-1);
 
+	// Setup attributes for shader program
+	std::vector<std::string> shader_attribs = {"vertexPosition_modelspace", "vertexUV", "vertexUV"};
+
+	// Create new object
+	m_obj = new BasicObject("../suzanne.obj",
+	                        "../Shaders/walls/WallShader.vert",
+	                        "../Shaders/walls/WallShader.frag",
+	                        shader_attribs);
+
 	gameLoop();
 }
 
@@ -107,11 +117,8 @@ void MainGame::initSystems() {
 	// Initialize the game engine
 	UntitledEngine::init();
 
-	// Initialize sound, must happen after UntitledEngine::init
-	//m_audioEngine.init();
-
 	// Create our window
-	m_window.create("ZombieGame", m_screenWidth, m_screenHeight, 0);
+	m_window.create("Bromerman", m_screenWidth, m_screenHeight, 0);
 
 	// Set window data for callback functions
 	glfwSetWindowUserPointer(m_window.getWindow(), &m_inputManager);
@@ -124,35 +131,19 @@ void MainGame::initSystems() {
 	// Grey background color
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 
+	// Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
+
+	// Cull triangles which normal is not towards the camera
+	glEnable(GL_CULL_FACE);
+
 	// Set up the shaders
-	initShaders();
-
-	// Initialize our spritebatch
-	//m_agentSpriteBatch.init();
-	//m_hudSpriteBatch.init();
-
-	// Initialize sprite font
-	//m_spriteFont = new UntitledEngine::SpriteFont("../Fonts/chintzy.ttf", 64);
+	//initShaders();
 
 	// Set up the camera
 	m_camera.init(m_screenWidth, m_screenHeight);
-	//m_hudCamera.init(m_screenWidth, m_screenHeight);
-	//m_hudCamera.setPosition(glm::vec3(m_screenWidth / 2, m_screenHeight / 2, 0.0f));
-
-	// Initialize particles
-	//m_bloodParticleBatch = new UntitledEngine::ParticleBatch2D;
-
-	// Initialize the particle batch and use a lambda function to define the update
-/*
-	m_bloodParticleBatch->init(1000, 0.05f,
-	                           UntitledEngine::ResourceManager::getTexture("../Textures/particle.png"),
-	                           [](UntitledEngine::Particle2D &particle, float deltaTime) {
-		                           particle.position += particle.velocity * deltaTime;
-		                           particle.color.a = (GLubyte) (particle.life * 255.0f);
-	                           });
-*/
-
-	//m_particleEngine.addParticleBatch(m_bloodParticleBatch);
 
 }
 
@@ -161,41 +152,11 @@ void MainGame::initLevel() {
 	m_levels.push_back(new Level("../Levels/level1.txt"));
 	m_currentLevel = 0;
 
-	//m_player = new Player();
-	//m_player->init(PLAYER_SPEED, m_levels[m_currentLevel]->getStartPlayerPos(), &m_inputManager, &m_camera, &m_bullets);
-
-	//m_humans.push_back(m_player);
-
 	std::mt19937 randomEngine;
 	randomEngine.seed(time(nullptr));
 
 	std::uniform_int_distribution<int> randX(2, m_levels[m_currentLevel]->getWidth() - 2);
 	std::uniform_int_distribution<int> randY(2, m_levels[m_currentLevel]->getHeight() - 2);
-
-	// Add all the random humans
-/*	for (int i = 0; i < m_levels[m_currentLevel]->getNumHumans(); i++) {
-		m_humans.push_back(new Human);
-		glm::vec3 pos(randX(randomEngine) * TILE_WIDTH, randY(randomEngine) * TILE_WIDTH, 0.0f);
-		m_humans.back()->init(HUMAN_SPEED, pos);
-	}
-
-	// Add the zombies
-	const std::vector<glm::vec3> &zombiePositions = m_levels[m_currentLevel]->getZombieStartPositions();
-	for (size_t i = 0; i < zombiePositions.size(); i++) {
-		m_zombies.push_back(new Zombie);
-		m_zombies.back()->init(ZOMBIE_SPEED, zombiePositions[i]);
-	}*/
-
-	// Set up the players guns
-/*	const float BULLET_SPEED = 20.0f;
-	m_player->addGun(
-			new Gun("Magnum", 10, 1, 0.1f, 30, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/pistol.wav")*//*));
-	m_player->addGun(
-			new Gun("Shotgun", 60, 12, 0.8f, 4, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*//*));
-	m_player->addGun(
-			new Gun("MP5", 2, 1, 0.4f, 20, BULLET_SPEED*//*, m_audioEngine.loadSoundEffect("../Sound/shots/cg1.wav")*//*));
-	m_player->addGun(
-			new Gun("BOMB", 80, 1, 0.0f, 50, 0*//*, m_audioEngine.loadSoundEffect("../Sound/shots/shotgun.wav")*//*));*/
 }
 
 void MainGame::initShaders() {
@@ -219,15 +180,21 @@ void MainGame::gameLoop() {
 	// Used to cap the FPS
 	UntitledEngine::FpsLimiter fpsLimiter;
 	fpsLimiter.setMaxFPS(DESIRED_FPS);
+	float previousTicks = UntitledEngine::getGameTicks();
 
 	// Zoom out the camera by 3x
 	const float CAMERA_SCALE = 1.0f / 3.0f;
 	m_camera.setScale(CAMERA_SCALE);
 
-	float previousTicks = UntitledEngine::getGameTicks();
+	// Init obj
+	m_obj->init({0, 1, 0},  // direction
+	            {5, 5, 0},  // position
+	            &m_camera);  // camera
 
 	// Main loop
+	std::cout << "gamestate0: '" << (int)m_gameState << "'" << std::endl;
 	while (m_gameState == GameState::PLAY) {
+		std::cout << "gamestate1: '" << (int)m_gameState << "'" << std::endl;
 		fpsLimiter.begin();
 
 		// Calculate the frameTime in milliseconds
@@ -249,6 +216,7 @@ void MainGame::gameLoop() {
 		while (totalDeltaTime > 0.0f && i < MAX_PHYSICS_STEPS) {
 			// The deltaTime should be the the smaller of the totalDeltaTime and MAX_DELTA_TIME
 			float deltaTime = std::min(totalDeltaTime, MAX_DELTA_TIME);
+
 			// Update all physics here and pass in deltaTime
 			//updateAgents(deltaTime);
 			//updateBullets(deltaTime);
@@ -269,8 +237,10 @@ void MainGame::gameLoop() {
 		// End the frame, limit the FPS, and get the current FPS.
 		m_fps = fpsLimiter.end();
 		std::cout << m_fps << std::endl;
+		std::cout << "gamestate2: '" << (int)m_gameState << "'" << std::endl;
 
 	}
+	std::cout << "gamestate3: '" << (int)m_gameState << "'" << std::endl;
 }
 
 void MainGame::updateAgents(float deltaTime) {
@@ -411,7 +381,7 @@ void MainGame::checkVictory() {
 	// _currentLevel++; initLevel(...);
 
 	// If all zombies are dead we win!
-	if (m_zombies.empty()) {
+/*	if (m_zombies.empty()) {
 		// Print victory message
 		std::printf("*** You win! ***\n You killed %d humans and %d zombies. There are %zu/%d civilians remaining",
 		            m_numHumansKilled, m_numZombiesKilled, m_humans.size() - 1,
@@ -419,14 +389,13 @@ void MainGame::checkVictory() {
 
 		// Easy way to end the game :P
 		UntitledEngine::fatalError("");
-	}
+	}*/
 }
 
 void MainGame::processInput() {
 	glfwPollEvents();
 
-	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q)
-	        || glfwWindowShouldClose(m_window.getWindow()) == 0) {
+	if (m_inputManager.isKeyDown(GLFW_KEY_Q) || m_inputManager.wasKeyDown(GLFW_KEY_Q)) {
 		m_gameState = GameState::EXIT;
 		return;
 	}
@@ -451,42 +420,22 @@ void MainGame::processInput() {
 }
 
 void MainGame::drawGame() {
+
+	std::cout << "---drawGame() start---\n";
+
 	// Set the base depth to 1.0
 	glClearDepth(1.0);
 	// Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	m_textureProgram.use();
-
-
-// Compute the MVP matrix from keyboard and mouse input
-	glm::mat4 ProjectionMatrix = m_camera.get_projectionMatrix();
-	glm::mat4 ViewMatrix = m_camera.get_viewMatrix();
-	glm::mat4 ModelMatrix = m_camera.get_modelMatrix();
-	glm::mat4 MVP = m_camera.getCameraMatrix();
-
-	// Send our transformation to the currently bound shader,
-	// in the "MVP" uniform
-	glUniformMatrix4fv(m_textureProgram.getUniformLocation("MVP"), 1, GL_FALSE, &MVP[0][0]);
-	glUniformMatrix4fv(m_textureProgram.getUniformLocation("M"), 1, GL_FALSE, &ModelMatrix[0][0]);
-	glUniformMatrix4fv(m_textureProgram.getUniformLocation("V"), 1, GL_FALSE, &ViewMatrix[0][0]);
-
-	glm::vec3 lightPos = glm::vec3(4,4,4);
-	glUniform3f(m_textureProgram.getUniformLocation("LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
-
-	// Get a handle for our "myTextureSampler" uniform
-	GLuint textureUniform  = m_textureProgram.getUniformLocation("myTextureSampler");
-	// Load texture and/or get textureID
-	GLuint textureID = UntitledEngine::ResourceManager::getTexture(texturePath).id;
-	// Bind our texture in Texture Unit 0
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	// Set our "myTextureSampler" sampler to use Texture Unit 0
-	glUniform1i(textureUniform, 0);
-
-
 	// Draw the level
-	m_levels[m_currentLevel]->draw();
+	//m_levels[m_currentLevel]->draw();
+
+	// Render basic object
+	m_obj->render();
+
+	// Begin drawing objects
+	//m_textureProgram.use();
 
 	// Begin drawing agents
 	/*m_agentSpriteBatch.begin();
@@ -525,14 +474,16 @@ void MainGame::drawGame() {
 	drawHud();
 */
 	// Unbind the program
-	m_textureProgram.unuse();
+	//m_textureProgram.unuse();
 
 	// Swap our buffer and draw everything to the screen!
 	m_window.swapBuffer();
+
+	std::cout << "---drawGame() end---\n";
 }
 
 void MainGame::drawHud() {
-	char buffer[256];
+/*	char buffer[256];
 
 	glm::mat4 projectionMatrix = m_hudCamera.getCameraMatrix();
 	GLint mvpUniform = m_textureProgram.getUniformLocation("MVP");
@@ -541,15 +492,15 @@ void MainGame::drawHud() {
 	m_hudSpriteBatch.begin();
 
 	std::sprintf(buffer, "Num Humans %zu", m_humans.size());
-	/*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 0),
-					  glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*/
+	*//*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 0),
+					  glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*//*
 
 	std::sprintf(buffer, "Num Zombies %zu", m_zombies.size());
-	/*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 36),
-					  glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*/
+	*//*m_spriteFont->draw(m_hudSpriteBatch, buffer, glm::vec2(0, 36),
+					  glm::vec2(0.5), 0.0f, UntitledEngine::ColorRGBA8(255, 255, 255, 255));*//*
 
 	m_hudSpriteBatch.end();
-	m_hudSpriteBatch.renderBatch();
+	m_hudSpriteBatch.renderBatch();*/
 }
 
 void MainGame::addBlood(const glm::vec2 &position, int numParticles) {

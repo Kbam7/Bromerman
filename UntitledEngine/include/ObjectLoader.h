@@ -1,10 +1,11 @@
 #ifndef OBJECTLOADER_H
 #define OBJECTLOADER_H
 
-#include <GLM/glm.hpp>
+#include <glm/glm.hpp>
 #include <vector>
 
 namespace UntitledEngine {
+
 bool loadAssImp(
 		const char * path,
 		std::vector<unsigned short> & indices,

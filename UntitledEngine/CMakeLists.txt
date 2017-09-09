@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(UntitledEngine)
 
 set(CMAKE_CXX_STANDARD 14)
+set( CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -std=c++14 -g3" )
 
 # - Find required packages
 find_package(OpenGL REQUIRED)
@@ -25,6 +26,7 @@ set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/
         src/ParticleEngine2D.cpp        src/picoPNG.cpp         src/ResourceManager.cpp
         src/ScreenList.cpp              src/Sprite.cpp          src/SpriteBatch.cpp
         src/TextureCache.cpp    		src/Timing.cpp			#src/SpriteFont.cpp
+		src/ObjectLoader.cpp            src/Camera2D.cpp
         )
 
 # - Add library
