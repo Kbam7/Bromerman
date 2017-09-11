@@ -8,22 +8,6 @@ namespace UntitledEngine {
 
 	const float ONE_NANOSEC = 1000000000.0f; // One nano second
 
-	void current_utc_time(struct timespec *ts) {
-		#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
-				clock_serv_t cclock;
-				mach_timespec_t mts;
-
-				host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
-				clock_get_time(cclock, &mts);
-				mach_port_deallocate(mach_task_self(), cclock);
-				ts->tv_sec = mts.tv_sec;
-				ts->tv_nsec = mts.tv_nsec;
-		#else
-				clock_gettime(CLOCK_REALTIME, ts);
-		#endif
-
-	}
-
 	int init() {
 
 		// Initialise GLFW
@@ -32,17 +16,38 @@ namespace UntitledEngine {
 			return -1;
 		}
 
-		getGameTicks();
-
+		// Set window hints for anti-aliasing and OpenGL version
 		glfwWindowHint(GLFW_SAMPLES, 4);                        // 4x antialiasing
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);          // We want OpenGL 3.3
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);          // We want OpenGL 3.3
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);    // To make MacOS happy; should not be needed
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
+
+		// Init game time
+		getGameTicks();
 
 		return 0;
 	}
 
+	// gets time and stores it into 'ts'
+	void current_utc_time(struct timespec *ts) {
+		#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
+			clock_serv_t cclock;
+			mach_timespec_t mts;
+
+			host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+			clock_get_time(cclock, &mts);
+			mach_port_deallocate(mach_task_self(), cclock);
+			ts->tv_sec = mts.tv_sec;
+			ts->tv_nsec = mts.tv_nsec;
+		#else
+			clock_gettime(CLOCK_REALTIME, ts);
+		#endif
+
+	}
+
+	// Returns time in milliseconds since this function was first called.
+	// Used on init to game
 	size_t  getGameTicks(void) {
 
 		static struct timespec  _start_time = {-1,-1};  // time of init

@@ -17,7 +17,7 @@ public:
 	            const std::string & fragShader, const std::vector<std::string> & attrs);
 
 	void init(glm::vec3 direction, glm::vec3 position, UntitledEngine::Camera3D* camera);
-	void init_shaders(const std::string & vertShader,
+	void initShaders(const std::string & vertShader,
 	                  const std::string & fragShader,
 	                  const std::vector<std::string> & attrs);
 	void render();

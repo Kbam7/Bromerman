@@ -122,7 +122,6 @@ void MainGame::initSystems() {
 
 	// Set window data for callback functions
 	glfwSetWindowUserPointer(m_window.getWindow(), &m_inputManager);
-
 	// Set callbacks
 	glfwSetKeyCallback(m_window.getWindow(), &key_callback);
 	glfwSetCursorPosCallback(m_window.getWindow(), &cursor_position_callback);
@@ -135,7 +134,6 @@ void MainGame::initSystems() {
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
-
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
 
@@ -183,12 +181,12 @@ void MainGame::gameLoop() {
 	float previousTicks = UntitledEngine::getGameTicks();
 
 	// Zoom out the camera by 3x
-	const float CAMERA_SCALE = 1.0f / 3.0f;
+	const float CAMERA_SCALE = 1.0f /*/ 3.0f*/;
 	m_camera.setScale(CAMERA_SCALE);
 
 	// Init obj
-	m_obj->init({0, 1, 0},  // direction
-	            {5, 5, 0},  // position
+	m_obj->init({1, 0, 0},  // direction
+	            {0, 0, 0},  // position
 	            &m_camera);  // camera
 
 	// Main loop
@@ -402,15 +400,15 @@ void MainGame::processInput() {
 
 	// Vertical Movements
 	if (m_inputManager.isKeyDown(GLFW_KEY_W))
-		m_camera.offsetPosition(glm::vec3(0, -1.0f * PLAYER_SPEED, 0));
+		m_camera.offsetPosition(glm::vec3(0, -0.1f * PLAYER_SPEED, 0));
 	else if (m_inputManager.isKeyDown(GLFW_KEY_S))
-		m_camera.offsetPosition(glm::vec3(0, 1 * PLAYER_SPEED, 0));
+		m_camera.offsetPosition(glm::vec3(0, 0.1f * PLAYER_SPEED, 0));
 
 	// Horizontal Movements
 	if (m_inputManager.isKeyDown(GLFW_KEY_A))
-		m_camera.offsetPosition(glm::vec3(1 * PLAYER_SPEED, 0, 0));
+		m_camera.offsetPosition(glm::vec3(0.1f * PLAYER_SPEED, 0, 0));
 	else if (m_inputManager.isKeyDown(GLFW_KEY_D))
-		m_camera.offsetPosition(glm::vec3(-1 * PLAYER_SPEED, 0, 0));
+		m_camera.offsetPosition(glm::vec3(-0.1f * PLAYER_SPEED, 0, 0));
 
 	// Zoom
 	if (m_inputManager.isKeyDown(GLFW_KEY_Z))

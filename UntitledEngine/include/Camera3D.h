@@ -70,6 +70,9 @@ namespace UntitledEngine {
 		bool _needsMatrixUpdate;
 		float _scale;
 		glm::vec3 _position;
+		glm::vec3 _direction;
+		glm::vec3 _up;
+
 		glm::mat4 _cameraMatrix;
 		glm::mat4 _projectionMatrix;
 		glm::mat4 _viewMatrix;

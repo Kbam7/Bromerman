@@ -27,11 +27,16 @@ namespace UntitledEngine {
         void unuse();
 
         void dispose();
+
+	    int get_numAttributes() const {
+		    return _numAttributes;
+	    }
+
     private:
 
         int _numAttributes;
 
-        void compileShader(const char* source, const std::string& name, GLuint id);
+	    void compileShader(const char* source, const std::string& name, GLuint id);
 
         GLuint _programID;
 

@@ -1,4 +1,6 @@
 #include <UntitledEngineErrors.h>
+#include <iostream>
+#include <ResourceManager.h>
 #include "BasicObject.h"
 #include "UntitledEngine/include/ObjectLoader.h"
 
@@ -7,35 +9,45 @@ BasicObject::BasicObject(const std::string & path, const std::string & vertShade
 	m_direction({0,0,0,0}),
 	m_position({0,0,0,1})
 {
+	// Create and bind VAO for configuration
+	glGenVertexArrays(1, &m_vao);
+	glBindVertexArray(m_vao);
+
 	// Setup shaders
 	if (!vertShader.empty() && !fragShader.empty())
-		init_shaders(vertShader, fragShader, attrs);
+		this->initShaders(vertShader, fragShader, attrs);
 
 	// Load object from file
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3>      indexed_vertices;
 	std::vector<glm::vec2>      indexed_uvs;
 	std::vector<glm::vec3>      indexed_normals;
+	//std::vector<std::string>    textures;
 
 	bool res = UntitledEngine::loadAssImp(path.c_str(), indices, indexed_vertices, indexed_uvs, indexed_normals);
 	if (!res)
 		UntitledEngine::fatalError("Unable to load object " + path);
 
-	glGenVertexArrays(1, &m_vao);
-	glBindVertexArray(m_vao);
+	//m_texture = UntitledEngine::ResourceManager::getTexture("Textures/player.png");
 
 	// Load data into VBO's
+	glEnableVertexAttribArray(0);
 	glGenBuffers(1, &m_vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
+	glEnableVertexAttribArray(1);
 	glGenBuffers(1, &m_uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
+	glEnableVertexAttribArray(2);
 	glGenBuffers(1, &m_normalbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_normalbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Index array for vertices
 	glGenBuffers(1, &m_elementbuffer);
@@ -43,21 +55,7 @@ BasicObject::BasicObject(const std::string & path, const std::string & vertShade
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 	m_nIndices = indices.size();
 
-	// 1rst attribute buffer : vertices
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexbuffer);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	// 2nd attribute buffer : UVs
-	glBindBuffer(GL_ARRAY_BUFFER, m_uvbuffer);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	// 3rd attribute buffer : normals
-	glBindBuffer(GL_ARRAY_BUFFER, m_normalbuffer);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	// Index buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_elementbuffer);
-
+	// Unbind configured VAO
 	glBindVertexArray(0);
 }
 
@@ -71,7 +69,7 @@ void BasicObject::init(glm::vec3 direction, glm::vec3 position, UntitledEngine::
 	m_camera = camera;
 }
 
-void BasicObject::init_shaders(const std::string & vertShader, const std::string & fragShader,
+void BasicObject::initShaders(const std::string & vertShader, const std::string & fragShader,
                                const std::vector<std::string> & attrs) {
 	// Compile shader program
 	m_shaderProgram.compileShaders(vertShader, fragShader);
