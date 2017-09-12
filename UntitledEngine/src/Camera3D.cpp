@@ -33,7 +33,7 @@ namespace UntitledEngine {
 				glm::vec3(0,0,0), // and looks at this point
 				glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 		);
-		// Model matrix : an identity matrix (model will be at the origin)
+		// Mesh matrix : an identity matrix (Mesh will be at the origin)
 		_modelMatrix = glm::mat4(1.0f);
 		// Our ModelViewProjection : multiplication of our 3 matrices
 		_mvpMatrix = _projectionMatrix * _viewMatrix * _modelMatrix; // Remember, matrix multiplication is the other way around

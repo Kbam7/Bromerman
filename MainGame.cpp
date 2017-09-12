@@ -4,7 +4,6 @@
 #include "UntitledEngine/include/Timing.h"
 #include "UntitledEngine/include/UntitledEngineErrors.h"
 #include "UntitledEngine/include/ResourceManager.h"
-#include "BasicObject.h"
 #include <random>
 #include <ctime>
 #include <algorithm>
@@ -96,19 +95,15 @@ void MainGame::run() {
 
 	initSystems();
 
-	initLevel();
+	//initLevel();
 
 	//UntitledEngine::Music music = m_audioEngine.loadMusic("../Sound/XYZ.ogg");
 	//music.play(-1);
 
-	// Setup attributes for shader program
-	std::vector<std::string> shader_attribs = {"vertexPosition_modelspace", "vertexUV", "vertexUV"};
-
 	// Create new object
-	m_obj = new BasicObject("../suzanne.obj",
-	                        "../Shaders/walls/WallShader.vert",
-	                        "../Shaders/walls/WallShader.frag",
-	                        shader_attribs);
+	std::vector<std::string> shader_attribs = {"aPos", "aNormal", "aTexCoords"};
+	m_model = new Model("../Objects/test.obj", &m_camera);
+	m_model->initShaders("../Shaders/walls/Shader.vert", "../Shaders/walls/Shader.frag", shader_attribs);
 
 	gameLoop();
 }
@@ -184,15 +179,8 @@ void MainGame::gameLoop() {
 	const float CAMERA_SCALE = 1.0f /*/ 3.0f*/;
 	m_camera.setScale(CAMERA_SCALE);
 
-	// Init obj
-	m_obj->init({1, 0, 0},  // direction
-	            {0, 0, 0},  // position
-	            &m_camera);  // camera
-
 	// Main loop
-	std::cout << "gamestate0: '" << (int)m_gameState << "'" << std::endl;
 	while (m_gameState == GameState::PLAY) {
-		std::cout << "gamestate1: '" << (int)m_gameState << "'" << std::endl;
 		fpsLimiter.begin();
 
 		// Calculate the frameTime in milliseconds
@@ -235,10 +223,7 @@ void MainGame::gameLoop() {
 		// End the frame, limit the FPS, and get the current FPS.
 		m_fps = fpsLimiter.end();
 		std::cout << m_fps << std::endl;
-		std::cout << "gamestate2: '" << (int)m_gameState << "'" << std::endl;
-
 	}
-	std::cout << "gamestate3: '" << (int)m_gameState << "'" << std::endl;
 }
 
 void MainGame::updateAgents(float deltaTime) {
@@ -398,23 +383,29 @@ void MainGame::processInput() {
 		return;
 	}
 
-	// Vertical Movements
+	// y axis
 	if (m_inputManager.isKeyDown(GLFW_KEY_W))
 		m_camera.offsetPosition(glm::vec3(0, -0.1f * PLAYER_SPEED, 0));
 	else if (m_inputManager.isKeyDown(GLFW_KEY_S))
 		m_camera.offsetPosition(glm::vec3(0, 0.1f * PLAYER_SPEED, 0));
 
-	// Horizontal Movements
+	// x axis
 	if (m_inputManager.isKeyDown(GLFW_KEY_A))
 		m_camera.offsetPosition(glm::vec3(0.1f * PLAYER_SPEED, 0, 0));
 	else if (m_inputManager.isKeyDown(GLFW_KEY_D))
 		m_camera.offsetPosition(glm::vec3(-0.1f * PLAYER_SPEED, 0, 0));
 
-	// Zoom
+	// z axis
 	if (m_inputManager.isKeyDown(GLFW_KEY_Z))
+		m_camera.offsetPosition(glm::vec3(0, 0, 0.1f * PLAYER_SPEED));
+	else if (m_inputManager.isKeyDown(GLFW_KEY_X))
+		m_camera.offsetPosition(glm::vec3(0, 0, -0.1f * PLAYER_SPEED));
+
+	// Zoom
+/*	if (m_inputManager.isKeyDown(GLFW_KEY_Z))
 		m_camera.offsetScale(0.005f);
 	else if (m_inputManager.isKeyDown(GLFW_KEY_X))
-		m_camera.offsetScale(-0.005f);
+		m_camera.offsetScale(-0.005f);*/
 }
 
 void MainGame::drawGame() {
@@ -430,7 +421,7 @@ void MainGame::drawGame() {
 	//m_levels[m_currentLevel]->draw();
 
 	// Render basic object
-	m_obj->render();
+	m_model->draw();
 
 	// Begin drawing objects
 	//m_textureProgram.use();

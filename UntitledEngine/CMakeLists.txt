@@ -26,7 +26,7 @@ set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/
         src/ParticleEngine2D.cpp        src/picoPNG.cpp         src/ResourceManager.cpp
         src/ScreenList.cpp              src/Sprite.cpp          src/SpriteBatch.cpp
         src/TextureCache.cpp    		src/Timing.cpp			#src/SpriteFont.cpp
-		src/ObjectLoader.cpp            src/Camera2D.cpp
+		src/Camera2D.cpp				#src/ObjectLoader.cpp
         )
 
 # - Add library

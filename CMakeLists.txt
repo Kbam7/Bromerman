@@ -74,7 +74,7 @@ link_directories(
 )
 
 # - Executeable
-set( SOURCE_FILES main.cpp BasicObject.cpp Level.cpp MainGame.cpp) #Agent.cpp Zombie.cpp Human.cpp Player.cpp Gun.cpp Bullet.cpp
+set( SOURCE_FILES main.cpp Model.cpp Mesh.cpp Level.cpp MainGame.cpp) #Agent.cpp Zombie.cpp Human.cpp Player.cpp Gun.cpp Bullet.cpp
 add_executable( ${PROJECT_NAME} ${SOURCE_FILES} )
 
 # - Link to library

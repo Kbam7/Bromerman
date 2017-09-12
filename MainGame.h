@@ -13,7 +13,8 @@
 //#include "Player.h"
 #include "Level.h"
 //#include "Bullet.h"
-#include "BasicObject.h"
+#include "Mesh.h"
+#include "Model.h"
 
 #include <GLFW/glfw3.h>
 
@@ -95,7 +96,7 @@ private:
 	float m_fps;
 	int m_currentLevel;
 
-	BasicObject *m_obj;
+	Model *m_model;
 	//Player *m_player;
 	//std::vector<Human *> m_humans; ///< Vector of all humans
 	//std::vector<Zombie *> m_zombies; ///< Vector of all zombies

@@ -50,7 +50,7 @@ namespace UntitledEngine {
 		// Fill face indices
 		indices.reserve(3 * mesh->mNumFaces);
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
-			// Assume the model has only triangles.
+			// Assume the Mesh has only triangles.
 			indices.push_back(mesh->mFaces[i].mIndices[0]);
 			indices.push_back(mesh->mFaces[i].mIndices[1]);
 			indices.push_back(mesh->mFaces[i].mIndices[2]);

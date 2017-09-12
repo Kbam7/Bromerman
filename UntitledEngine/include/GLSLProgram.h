@@ -28,20 +28,16 @@ namespace UntitledEngine {
 
         void dispose();
 
-	    int get_numAttributes() const {
-		    return _numAttributes;
-	    }
+	    int     get_numAttributes() const;
+	    GLuint  get_programID() const;
 
     private:
-
-        int _numAttributes;
-
 	    void compileShader(const char* source, const std::string& name, GLuint id);
 
-        GLuint _programID;
-
-        GLuint _vertexShaderID;
-        GLuint _fragmentShaderID;
+        GLuint  _programID;
+	    GLuint  _vertexShaderID;
+        GLuint  _fragmentShaderID;
+	    int     _numAttributes;
     };
 
 }
