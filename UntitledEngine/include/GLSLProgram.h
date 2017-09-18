@@ -5,39 +5,41 @@
 
 namespace UntitledEngine {
 
-    //This class handles the compilation, linking, and usage of a GLSL shader program.
-    //Reference: http://www.opengl.org/wiki/Shader_Compilation
-    class GLSLProgram
-    {
-    public:
-        GLSLProgram();
-        ~GLSLProgram();
+	//This class handles the compilation, linking, and usage of a GLSL shader program.
+	//Reference: http://www.opengl.org/wiki/Shader_Compilation
+	class GLSLProgram {
+	public:
+		GLSLProgram();
 
-        void compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
+		~GLSLProgram();
 
-        void compileShadersFromSource(const char* vertexSource, const char* fragmentSource);
+		void compileShaders(const std::string &vertexShaderFilePath, const std::string &fragmentShaderFilePath);
 
-        void linkShaders();
+		void compileShadersFromSource(const char *vertexSource, const char *fragmentSource);
 
-        void addAttribute(const std::string& attributeName);
+		void linkShaders();
 
-        GLint getUniformLocation(const std::string& uniformName);
+		void addAttribute(const std::string &attributeName);
 
-        void use();
-        void unuse();
+		GLint getUniformLocation(const std::string &uniformName);
 
-        void dispose();
+		void use();
 
-	    int     get_numAttributes() const;
-	    GLuint  get_programID() const;
+		void unuse();
 
-    private:
-	    void compileShader(const char* source, const std::string& name, GLuint id);
+		void dispose();
 
-        GLuint  _programID;
-	    GLuint  _vertexShaderID;
-        GLuint  _fragmentShaderID;
-	    int     _numAttributes;
-    };
+		int get_numAttributes() const;
+
+		GLuint get_programID() const;
+
+	private:
+		void compileShader(const char *source, const std::string &name, GLuint id);
+
+		GLuint _programID;
+		GLuint _vertexShaderID;
+		GLuint _fragmentShaderID;
+		int _numAttributes;
+	};
 
 }

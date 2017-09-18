@@ -101,8 +101,8 @@ void MainGame::run() {
 	//music.play(-1);
 
 	// Create new object
-	std::vector<std::string> shader_attribs = {"aPos", "aNormal", "aTexCoords"};
-	m_model = new Model("../Objects/test.obj", &m_camera);
+	std::vector<std::string> shader_attribs; // empty. Attributes defined in vertex shader
+	m_model = new Model("../Objects/drone_lvl_2.obj", &m_camera);
 	m_model->initShaders("../Shaders/walls/Shader.vert", "../Shaders/walls/Shader.frag", shader_attribs);
 
 	gameLoop();

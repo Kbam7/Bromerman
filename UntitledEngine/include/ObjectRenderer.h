@@ -8,10 +8,6 @@
 
 namespace UntitledEngine {
 
-// Each render batch is used for a single draw call
-/*
- * @param offset: Offeset in vertex buffer
-*/
 class RenderBatch {
 public:
     RenderBatch(GLuint Offset, GLuint NumVertices, GLuint Texture) : offset(Offset),
@@ -52,10 +48,11 @@ private:
     void createRenderBatches();
 
     // Generates our VAO and VBO
-    void createVertexArray();
+    void setupBuffers();
 
-    GLuint _vbo;
-    GLuint _vao;
+    GLuint m_vao;
+    GLuint m_vbo;
+    GLuint m_ebo;
 
     std::vector<RenderBatch> _renderBatches;
 };

@@ -25,11 +25,11 @@ public:
 
     GLuint texture;
     float depth;
-    
-    Vertex topLeft;
-    Vertex bottomLeft;
-    Vertex topRight;
-    Vertex bottomRight;
+
+	Vertex2D topLeft;
+	Vertex2D bottomLeft;
+	Vertex2D topRight;
+	Vertex2D bottomRight;
 private:
     // Rotates a point about (0,0) by angle
     glm::vec2 rotatePoint(const glm::vec2& pos, float angle);

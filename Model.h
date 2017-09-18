@@ -18,6 +18,7 @@ public:
 	glm::vec4                   m_position;
 	UntitledEngine::GLSLProgram m_shader;
 	UntitledEngine::Camera3D    *m_camera;
+	size_t                      m_totalNumVertices;
 
 	// constructor, expects a filepath to a 3D model.
 	Model(std::string const &path, UntitledEngine::Camera3D *camera);

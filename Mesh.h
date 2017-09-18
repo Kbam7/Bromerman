@@ -8,36 +8,21 @@
 #include <GLSLProgram.h>
 #include <Camera3D.h>
 #include <GLTexture.h>
+#include <Vertex.h>
 
-struct Vertex {
-	// position
-	glm::vec3 Position;
-	// normal
-	glm::vec3 Normal;
-	// texCoords
-	glm::vec2 TexCoords;
-	// tangent
-	glm::vec3 Tangent;
-	// bitangent
-	glm::vec3 Bitangent;
-};
-
-/*struct Texture {
-	GLuint      id;
-	std::string type;
-	aiString    path;
-};*/
+void    activateAndBindTextures(std::vector<UntitledEngine::GLTexture> & textures, GLuint shaderID);
 
 class Mesh {
 public:
 	/*  Mesh Data  */
-	std::vector<Vertex>                     vertices;
+	std::vector<UntitledEngine::Vertex>     vertices;
 	std::vector<unsigned int>               indices;
 	std::vector<UntitledEngine::GLTexture>  textures;
+	size_t                                  m_nVertices;
 	GLuint                                  m_vao;
 
 	~Mesh();
-	Mesh(std::vector<Vertex> & vertices, std::vector<unsigned int> & indices, std::vector<UntitledEngine::GLTexture> & textures);
+	Mesh(std::vector<UntitledEngine::Vertex> & vertices, std::vector<unsigned int> & indices, std::vector<UntitledEngine::GLTexture> & textures);
 
 	// render the mesh
 	void draw(UntitledEngine::Camera3D *m_camera, UntitledEngine::GLSLProgram *m_shader);

@@ -10,19 +10,19 @@ namespace UntitledEngine {
         depth(Depth) {
 
         topLeft.color = color;
-        topLeft.setPosition(destRect.x, destRect.y + destRect.w, depth);
+        topLeft.setPosition(destRect.x, destRect.y + destRect.w);
         topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
 
         bottomLeft.color = color;
-        bottomLeft.setPosition(destRect.x, destRect.y, depth);
+        bottomLeft.setPosition(destRect.x, destRect.y);
         bottomLeft.setUV(uvRect.x, uvRect.y);
 
         bottomRight.color = color;
-        bottomRight.setPosition(destRect.x + destRect.z, destRect.y, depth);
+        bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
         bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
         topRight.color = color;
-        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w, depth);
+        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
         topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
     }
 
@@ -45,19 +45,19 @@ namespace UntitledEngine {
         tr = rotatePoint(tr, angle) + halfDims;
 
         topLeft.color = color;
-        topLeft.setPosition(destRect.x + tl.x, destRect.y + tl.y, depth);
+        topLeft.setPosition(destRect.x + tl.x, destRect.y + tl.y);
         topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
 
         bottomLeft.color = color;
-        bottomLeft.setPosition(destRect.x + bl.x, destRect.y + bl.y, depth);
+        bottomLeft.setPosition(destRect.x + bl.x, destRect.y + bl.y);
         bottomLeft.setUV(uvRect.x, uvRect.y);
 
         bottomRight.color = color;
-        bottomRight.setPosition(destRect.x + br.x, destRect.y + br.y, depth);
+        bottomRight.setPosition(destRect.x + br.x, destRect.y + br.y);
         bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
 
         topRight.color = color;
-        topRight.setPosition(destRect.x + tr.x, destRect.y + tr.y, depth);
+        topRight.setPosition(destRect.x + tr.x, destRect.y + tr.y);
         topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
     }
 
@@ -105,7 +105,7 @@ void SpriteBatch::end() {
     _glyphPointers.resize(_glyphs.size());
     for (size_t i = 0; i < _glyphs.size(); i++) {
         _glyphPointers[i] = &_glyphs[i];
-    }
+}
 
     sortGlyphs();
     createRenderBatches();
@@ -144,7 +144,7 @@ void SpriteBatch::renderBatch() {
 
 void SpriteBatch::createRenderBatches() {
     // This will store all the vertices that we need to upload
-    std::vector <Vertex> vertices;
+    std::vector <Vertex2D> vertices;
     // Resize the buffer to the exact size we need so we can treat
     // it like an array
     vertices.resize(_glyphPointers.size() * 6);
@@ -189,9 +189,9 @@ void SpriteBatch::createRenderBatches() {
     // Bind our VBO
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     // Orphan the buffer (for speed)
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex2D), nullptr, GL_DYNAMIC_DRAW);
     // Upload the data
-    glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
+    glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex2D), vertices.data());
 
     // Unbind the VBO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -220,11 +220,11 @@ void SpriteBatch::createVertexArray() {
     glEnableVertexAttribArray(2);
 
     //This is the position attribute pointer
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, position));
     //This is the color attribute pointer
-    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, color));
     //This is the UV attribute pointer
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, uv));
 
     glBindVertexArray(0);
 

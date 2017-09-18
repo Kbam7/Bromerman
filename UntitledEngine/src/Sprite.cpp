@@ -40,26 +40,26 @@ namespace UntitledEngine {
         //This array will hold our vertex data.
         //We need 6 vertices, and each vertex has 2
         //floats for X and Y
-        Vertex vertexData[6];
+        Vertex2D vertexData[6];
 
         //First Triangle
-        vertexData[0].setPosition(x + width, y + height, 0.0f);
+        vertexData[0].setPosition(x + width, y + height);
         vertexData[0].setUV(1.0f, 1.0f);
 
-        vertexData[1].setPosition(x, y + height, 0.0f);
+        vertexData[1].setPosition(x, y + height);
         vertexData[1].setUV(0.0f, 1.0f);
 
-        vertexData[2].setPosition(x, y, 0.0f);
+        vertexData[2].setPosition(x, y);
         vertexData[2].setUV(0.0f, 0.0f);
 
         //Second Triangle
-        vertexData[3].setPosition(x, y, 0.0f);
+        vertexData[3].setPosition(x, y);
         vertexData[3].setUV(0.0f, 0.0f);
 
-        vertexData[4].setPosition(x + width, y, 0.0f);
+        vertexData[4].setPosition(x + width, y);
         vertexData[4].setUV(1.0f, 0.0f);
 
-        vertexData[5].setPosition(x + width, y + height, 0.0f);
+        vertexData[5].setPosition(x + width, y + height);
         vertexData[5].setUV(1.0f, 1.0f);
 
         //Set all vertex colors to magenta
@@ -95,11 +95,11 @@ namespace UntitledEngine {
         glEnableVertexAttribArray(2);
 
         //This is the position attribute pointer
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, position));
         //This is the color attribute pointer
-        glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+        glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, color));
         //This is the UV attribute pointer
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, uv));
 
         //Draw the 6 vertices to the screen
         glDrawArrays(GL_TRIANGLES, 0, 6);

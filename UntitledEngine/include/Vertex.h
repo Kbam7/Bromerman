@@ -1,21 +1,19 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 namespace UntitledEngine {
 
 	struct Position {
 		float x;
 		float y;
-		float z;
 	};
 
 	struct ColorRGBA8 {
-		ColorRGBA8() : r(0), g(0), b(0), a(0) {}
-
+		ColorRGBA8() : r(0), g(0), b(0), a(0) { }
 		ColorRGBA8(GLubyte R, GLubyte G, GLubyte B, GLubyte A) :
-				r(R), g(G), b(B), a(A) {}
-
+				r(R), g(G), b(B), a(A) { }
 		GLubyte r;
 		GLubyte g;
 		GLubyte b;
@@ -27,8 +25,8 @@ namespace UntitledEngine {
 		float v;
 	};
 
-	//The vertex definition
-	struct Vertex {
+	//The vertex definition from MakingGamesWithBen YouTube tutorial
+	struct Vertex2D {
 		//This is the position struct. When you store a struct or class
 		//inside of another struct or class, it is called composition. This is
 		//layed out exactly the same in memory as if we had a float position[2],
@@ -41,10 +39,9 @@ namespace UntitledEngine {
 		//UV texture coordinates.
 		UV uv;
 
-		void setPosition(float x, float y, float z) {
+		void setPosition(float x, float y) {
 			position.x = x;
 			position.y = y;
-			position.z = z;
 		}
 
 		void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a) {
@@ -58,6 +55,19 @@ namespace UntitledEngine {
 			uv.u = u;
 			uv.v = v;
 		}
+	};
+
+	struct Vertex {
+		// position
+		glm::vec3 Position;
+		// normal
+		glm::vec3 Normal;
+		// texCoords
+		glm::vec2 TexCoords;
+		// tangent
+		glm::vec3 Tangent;
+		// bitangent
+		glm::vec3 Bitangent;
 	};
 
 }
