@@ -102,8 +102,13 @@ void MainGame::run() {
 
 	// Create new object
 	std::vector<std::string> shader_attribs; // empty. Attributes defined in vertex shader
-	m_model = new Model("../Objects/drone_lvl_2.obj", &m_camera);
+	m_model = new UntitledEngine::Model("../Objects/drone_lvl_2.obj", &m_camera);
 	m_model->initShaders("../Shaders/walls/Shader.vert", "../Shaders/walls/Shader.frag", shader_attribs);
+
+	// Add this model to the renderer   - renderer.add(model)
+	//						            - renderer.addInstances(model, model_matrices, count)
+
+	// In game loop, call renderer.render() to render all objects in renderer que
 
 	gameLoop();
 }
@@ -133,7 +138,10 @@ void MainGame::initSystems() {
 	glEnable(GL_CULL_FACE);
 
 	// Set up the shaders
-	//initShaders();
+	initShaders();
+
+	// Init object renderer
+	m_objectRenderer.init();
 
 	// Set up the camera
 	m_camera.init(m_screenWidth, m_screenHeight);
@@ -153,11 +161,8 @@ void MainGame::initLevel() {
 }
 
 void MainGame::initShaders() {
-	// Compile our color shader
-	m_textureProgram.compileShaders("../Shaders/textureShading.vert", "../Shaders/textureShading.frag");
-	m_textureProgram.addAttribute("vertexPosition");
-	m_textureProgram.addAttribute("vertexColor");
-	m_textureProgram.addAttribute("vertexUV");
+	// Compile our shader
+	m_textureProgram.compileShaders("../Shaders/walls/Shader.vert", "../Shaders/walls/Shader.frag");
 	m_textureProgram.linkShaders();
 }
 
@@ -410,7 +415,7 @@ void MainGame::processInput() {
 
 void MainGame::drawGame() {
 
-	std::cout << "---drawGame() start---\n";
+	std::cout << "---drawGame() start---\n"; // debug
 
 	// Set the base depth to 1.0
 	glClearDepth(1.0);
@@ -420,11 +425,31 @@ void MainGame::drawGame() {
 	// Draw the level
 	//m_levels[m_currentLevel]->draw();
 
-	// Render basic object
-	m_model->draw();
-
 	// Begin drawing objects
-	//m_textureProgram.use();
+	m_textureProgram.use();
+
+	// Set camera MVP matrix in shader
+	glm::mat4 MVP = m_camera.get_mvpMatrix();
+	glUniformMatrix4fv(m_textureProgram.getUniformLocation("MVP"), 1, GL_FALSE, &MVP[0][0]);
+
+	std::cout << "---drawGame()-HERE-1---\n"; // debug
+
+	// Add objects to render
+	m_objectRenderer.begin();
+
+	std::cout << "---drawGame()-HERE-2---\n"; // debug
+
+	m_objectRenderer.add(m_model);
+
+	std::cout << "---drawGame()-HERE-3---\n"; // debug
+
+	m_objectRenderer.end();
+
+	std::cout << "---drawGame()-HERE-4---\n"; // debug
+
+	m_objectRenderer.renderBatches(m_textureProgram.get_programID());
+
+	std::cout << "---drawGame()-HERE-5---\n"; // debug
 
 	// Begin drawing agents
 	/*m_agentSpriteBatch.begin();
@@ -463,7 +488,7 @@ void MainGame::drawGame() {
 	drawHud();
 */
 	// Unbind the program
-	//m_textureProgram.unuse();
+	m_textureProgram.unuse();
 
 	// Swap our buffer and draw everything to the screen!
 	m_window.swapBuffer();

@@ -13,8 +13,7 @@
 //#include "Player.h"
 #include "Level.h"
 //#include "Bullet.h"
-#include "Mesh.h"
-#include "Model.h"
+#include "ObjectRenderer.h"
 
 #include <GLFW/glfw3.h>
 
@@ -80,6 +79,8 @@ private:
 
 	UntitledEngine::InputManager m_inputManager; ///< Handles input
 
+	UntitledEngine::ObjectRenderer m_objectRenderer; ///< Handles input
+
 	UntitledEngine::Camera3D m_camera; ///< Main Camera
 	UntitledEngine::Camera3D m_hudCamera; ///< Hud Camera
 
@@ -96,7 +97,7 @@ private:
 	float m_fps;
 	int m_currentLevel;
 
-	Model *m_model;
+	UntitledEngine::Model *m_model;
 	//Player *m_player;
 	//std::vector<Human *> m_humans; ///< Vector of all humans
 	//std::vector<Zombie *> m_zombies; ///< Vector of all zombies

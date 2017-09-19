@@ -5,56 +5,89 @@
 #include <vector>
 
 #include "Vertex.h"
+#include "Mesh.h"
+#include "Model.h"
 
 namespace UntitledEngine {
 
-class RenderBatch {
+	enum class MeshSortType {
+		NONE,
+		nVERTICES_ASC,
+		nVERTICES_DESC,
+		TEXTURES
+	};
+
+class ObjectRenderBatch {
 public:
-    RenderBatch(GLuint Offset, GLuint NumVertices, GLuint Texture) : offset(Offset),
-        numVertices(NumVertices), texture(Texture) {
+	ObjectRenderBatch(GLuint Vertex_offset, GLuint NumVertices, GLuint Index_offset, GLuint NumIndices, std::vector<UntitledEngine::GLTexture> & Textures) :
+		    vertex_offset(Vertex_offset),
+            numVertices(NumVertices),
+		    index_offset(Index_offset),
+		    numIndices(NumIndices),
+		    textures(Textures)
+    {
+	    // empty
     }
-    GLuint offset;
+
+    GLuint vertex_offset;
     GLuint numVertices;
-    GLuint texture;
+	GLuint index_offset;
+	GLuint numIndices;
+	std::vector<UntitledEngine::GLTexture>  textures;
 };
 
 // The ObjectRenderer class is a more efficient way of drawing sprites
 class ObjectRenderer
 {
 public:
+	size_t  _totalNumVertices;
+
     ObjectRenderer();
     ~ObjectRenderer();
 
     // Initializes the ObjectRenderer
     void init();
+
+	// Cleans up after we're done
     void dispose();
 
-	void begin();
-    // Ends the ObjectRenderer
+	// Set sort type and clear any existing mesh pointers or render batches
+	void begin(MeshSortType sortType = MeshSortType::TEXTURES);
+
+    // Sorts meshes and creates render batches
     void end();
 
-    // Adds a glyph to the ObjectRenderer
-    void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8& color);
-    // Adds a glyph to the ObjectRenderer with rotation
-    void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8& color, float angle);
-    // Adds a glyph to the ObjectRenderer with rotation
-    void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8& color, const glm::vec2& dir);
+	// Add objects to renderer
+	void add(Model *model);
 
-    // Renders the entire ObjectRenderer to the screen
-    void renderBatch();
+    // Renders the all batches to the screen
+    void renderBatches(GLuint shaderID);
 
 private:
+	// Generates our VAO, VBO and EBO
+	void createBufferObjects();
+
     // Creates all the needed RenderBatches
     void createRenderBatches();
 
-    // Generates our VAO and VBO
-    void setupBuffers();
+	// Sorts glyphs according to _sortType
+	void sortGlyphs();
+
+	// Comparators used by sortGlyphs()
+	static bool nVerticesDescending(Mesh* a, Mesh* b);
+	static bool nVerticesAscending(Mesh* a, Mesh* b);
+	static bool compareTextures(Mesh* a, Mesh* b);
+
 
     GLuint m_vao;
     GLuint m_vbo;
     GLuint m_ebo;
 
-    std::vector<RenderBatch> _renderBatches;
+	std::vector<Mesh *>         _mesh_ptrs;
+	std::vector<unsigned int>   _indices;
+	MeshSortType                _sortType;
+
+    std::vector<ObjectRenderBatch> _renderBatches;
 };
 
 }

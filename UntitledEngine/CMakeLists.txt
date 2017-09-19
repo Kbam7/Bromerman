@@ -14,9 +14,18 @@ pkg_search_module(GLFW3 REQUIRED glfw3)
 pkg_search_module(GLM REQUIRED glm)
 pkg_search_module(ASSIMP REQUIRED assimp)
 
+IF (ASSIMP_FOUND)
+	message( STATUS "ASSIMP Found" )
+	message(STATUS "INC_DIRS: ${ASSIMP_INCLUDE_DIRS}")
+	message(STATUS "LIBS: ${ASSIMP_LIBRARIES}")
+	message(STATUS "LIB_DIRS: ${ASSIMP_LIBRARY_DIRS}")
+	message(STATUS "LD_FLAGS: ${ASSIMP_LDFLAGS}")
+ENDIF ()
+
 # - Directories for headers
 set(HEADER_FILES include/ ${OPENGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLFW3_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIRS}/../ )
-include_directories(BEFORE  ${HEADER_FILES})
+#include_directories(BEFORE  ${HEADER_FILES})
+link_directories(${ASSIMP_LIBRARY_DIRS})
 
 # - Directories for sources
 set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/IOManager.cpp
@@ -26,7 +35,8 @@ set(SOURCE_FILES    src/UntitledEngineErrors.cpp    src/GLSLProgram.cpp     src/
         src/ParticleEngine2D.cpp        src/picoPNG.cpp         src/ResourceManager.cpp
         src/ScreenList.cpp              src/Sprite.cpp          src/SpriteBatch.cpp
         src/TextureCache.cpp    		src/Timing.cpp			#src/SpriteFont.cpp
-		src/Camera2D.cpp				#src/ObjectLoader.cpp
+		src/Camera2D.cpp				src/ObjectRenderer.cpp
+		src/Model.cpp					src/Mesh.cpp
         )
 
 # - Add library

@@ -44,13 +44,13 @@ IF (GLM_FOUND)
 #    message(STATUS "LIB_DIRS: ${GLM_LIBRARY_DIRS}")
 #    message(STATUS "LD_FLAGS: ${GLM_LDFLAGS}")
 ENDIF ()
-IF (ASSIMP_FOUND)
-    message( STATUS "ASSIMP Found" )
+#IF (ASSIMP_FOUND)
+#    message( STATUS "ASSIMP Found" )
 #    message(STATUS "INC_DIRS: ${ASSIMP_INCLUDE_DIRS}")
 #    message(STATUS "LIBS: ${ASSIMP_LIBRARIES}")
 #    message(STATUS "LIB_DIRS: ${ASSIMP_LIBRARY_DIRS}")
 #    message(STATUS "LD_FLAGS: ${ASSIMP_LDFLAGS}")
-ENDIF ()
+#ENDIF ()
 message( "\n" )
 
 add_subdirectory( UntitledEngine )
@@ -62,7 +62,7 @@ include_directories( BEFORE
         ${GLEW_INCLUDE_DIRS}
         ${GLFW3_INCLUDE_DIRS}
         ${GLM_INCLUDE_DIRS}
-        ${ASSIMP_INCLUDE_DIRS}
+        #${ASSIMP_INCLUDE_DIRS}
         )
 
 # - Directories for libraries
@@ -74,7 +74,7 @@ link_directories(
 )
 
 # - Executeable
-set( SOURCE_FILES main.cpp Model.cpp Mesh.cpp Level.cpp MainGame.cpp) #Agent.cpp Zombie.cpp Human.cpp Player.cpp Gun.cpp Bullet.cpp
+set( SOURCE_FILES main.cpp Level.cpp MainGame.cpp) #Agent.cpp Zombie.cpp Human.cpp Player.cpp Gun.cpp Bullet.cpp
 add_executable( ${PROJECT_NAME} ${SOURCE_FILES} )
 
 # - Link to library
@@ -85,7 +85,7 @@ target_link_libraries( ${PROJECT_NAME}
         ${GLEW_LIBRARIES}
         ${GLFW3_LIBRARIES}
         ${GLM_LIBRARIES}
-        ${ASSIMP_LIBRARIES}
+        #${ASSIMP_LIBRARIES}
         )
 
 message( STATUS ${PROJECT_BINARY_DIR} )
